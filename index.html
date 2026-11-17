@@ -115,6 +115,16 @@ footer{margin-top:55px;border-top:1px solid #ffffff13;background:#090a11;padding
  .category small{font-size:11px}
 }
 
+
+/* Force the category partitions into a vertical stack on all mobile/tablet widths */
+@media(max-width:850px){
+ .category-strip{grid-template-columns:minmax(0,1fr)!important;gap:12px!important}
+ .category-strip>.category{width:100%;min-height:104px;padding:16px 20px;gap:14px}
+ .category-strip>.category .category-icon{flex:0 0 54px;width:54px;height:54px}
+ .category-strip>.category strong{font-size:14px}
+ .category-strip>.category small{font-size:11px}
+}
+
 </style>
 </head>
 <body>
