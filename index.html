@@ -83,25 +83,52 @@ footer{margin-top:55px;border-top:1px solid #ffffff13;background:#090a11;padding
  .footer-brand .brand-art{width:205px}
  .menu-toggle{flex:0 0 auto}
 }
+
+/* Restore the original PaperMatte mobile header layout */
+.brand{direction:ltr!important;display:flex!important;align-items:center;justify-content:flex-end;gap:18px;min-width:0;flex:0 1 auto;line-height:1.2}
+.brand-copy{display:flex;flex-direction:column;align-items:flex-end;gap:5px;white-space:nowrap}
+.brand-copy strong{font-family:Arial,sans-serif;font-size:28px;font-weight:800;letter-spacing:-.7px;color:#f8f8ff}
+.brand-copy em{font-style:normal;font-family:Arial,sans-serif;font-size:16px;letter-spacing:4px;color:#aeb3ca}
+.brand .brand-emblem{display:block!important;width:88px;height:88px;flex:0 0 88px;overflow:visible}
+.brand svg.brand-art{display:none!important}
+@media(max-width:900px){.brand-copy strong{font-size:23px}.brand-copy em{font-size:13px;letter-spacing:3px}.brand .brand-emblem{width:76px;height:76px;flex-basis:76px}}
+@media(max-width:650px){
+ header .container.nav{height:auto;min-height:0;padding:18px 0;display:grid;grid-template-columns:58px minmax(0,1fr);grid-template-areas:"menu brand" "search search";column-gap:14px;row-gap:18px;align-items:center}
+ .menu-toggle{display:flex!important;grid-area:menu;order:0;align-items:center;justify-content:center;width:58px;height:58px;border-radius:18px;font-size:27px;padding:0}
+ .brand{grid-area:brand;order:0;width:100%;max-width:100%;justify-content:flex-end;gap:12px;flex:initial}
+ .brand-copy strong{font-size:20px;letter-spacing:-.5px}
+ .brand-copy em{font-size:10px;letter-spacing:2.4px}
+ .brand .brand-emblem{width:68px;height:68px;flex-basis:68px}
+ .site-search{grid-area:search;order:0;display:flex;flex:initial;width:100%;max-width:none;height:62px;border-radius:23px;padding:0 18px}
+ .site-search input{font-size:17px}
+ .site-search span,.site-search kbd{font-size:23px}
+ header nav{display:none}
+ header .nav-cta{display:none}
+}
+
 </style>
 </head>
 <body>
 <header>
  <div class="container nav">
-  <a class="brand" href="#home"><svg class="brand-art" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 190" role="img" aria-label="PaperMatte Store">
-<defs><linearGradient id="pmPurple" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#5410f5"/><stop offset=".55" stop-color="#a000ff"/><stop offset="1" stop-color="#e12be9"/></linearGradient></defs>
-<g fill="url(#pmPurple)">
-<path d="M83 126C55 96 60 53 92 18C117 47 128 91 108 129Z"/>
-<path d="M104 132C91 83 112 31 151 5C173 54 159 105 121 139Z"/>
-<path d="M126 139C139 83 176 38 219 25C228 79 192 128 145 149Z"/>
-<path d="M146 151C183 103 234 79 278 87C260 137 211 163 157 163Z"/>
-<path d="M161 169C213 145 269 148 302 177C262 208 208 199 165 181Z"/>
-<path d="M71 145C29 119 10 78 24 40C64 64 86 105 84 143Z"/>
-<path d="M60 164C13 157 -18 124 -21 84C27 91 63 119 76 158Z" transform="translate(30 0)"/>
-</g>
-<text x="330" y="92" fill="#fff" font-family="Arial,Helvetica,sans-serif" font-size="78" font-weight="700" letter-spacing="-3">PaperMatte</text>
-<text x="330" y="163" fill="#fff" font-family="Arial,Helvetica,sans-serif" font-size="77" font-weight="700" letter-spacing="-2">Store</text>
-</svg></a>
+  <a class="brand" href="#home" aria-label="PaperMatte Store">
+   <span class="brand-copy"><strong>PaperMatte Store</strong><em>TECHNOLOGY, SIMPLIFIED</em></span>
+   <svg class="brand-emblem" viewBox="0 0 120 120" role="img" aria-label="PaperMatte emblem">
+    <defs><linearGradient id="oldPmFlower" x1="0" y1="1" x2="1" y2="0"><stop offset="0" stop-color="#5410f5"/><stop offset=".55" stop-color="#a000ff"/><stop offset="1" stop-color="#e12be9"/></linearGradient></defs>
+    <circle cx="60" cy="60" r="55" fill="#10052e" stroke="#8b4be9" stroke-width="2.5"/>
+    <g fill="url(#oldPmFlower)" transform="translate(13 12) scale(.75)">
+     <path d="M48 61C20 31 25 0 48 0C69 25 63 48 53 64Z"/>
+     <path d="M54 64C49 29 65 2 84 6C87 36 73 56 58 68Z"/>
+     <path d="M60 69C79 37 103 27 117 42C104 66 82 75 64 74Z"/>
+     <path d="M45 67C15 55 3 34 14 20C39 32 49 49 51 65Z"/>
+     <path d="M42 75C12 76 -3 61 2 45C28 48 43 58 51 72Z"/>
+     <path d="M62 78C91 68 112 79 110 96C82 101 66 90 58 82Z"/>
+     <path d="M48 82C24 99 4 96 0 81C22 69 39 73 51 78Z"/>
+    </g>
+    <text x="60" y="91" text-anchor="middle" fill="#fff" font-size="10" font-weight="700" font-family="Arial,sans-serif">PaperMatte</text>
+    <text x="60" y="102" text-anchor="middle" fill="#fff" font-size="9" font-weight="700" font-family="Arial,sans-serif">Store</text>
+   </svg>
+  </a>
   <nav id="mainNav"><a href="#home">الرئيسية</a><a href="#products">المنتجات</a><a href="#accessories">الإكسسوارات</a><a href="#offers">العروض</a><a href="#why-us">ليه PaperMatte؟</a><a href="#contact">تواصل معنا</a></nav>
   <label class="site-search" aria-label="البحث في المنتجات"><span>⌕</span><input id="siteSearch" type="search" placeholder="ابحث عن منتج..." autocomplete="off"><kbd>⌕</kbd></label>
   <a class="nav-cta" href="https://wa.me/201024915343?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%B9%D8%A7%D9%8A%D8%B2%20%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%B1%20%D8%B9%D9%86%20%D9%85%D9%86%D8%AA%D8%AC%D8%A7%D8%AA%20PaperMatte%20Store. " target="_blank" rel="noopener">تواصل معنا ↗</a>
