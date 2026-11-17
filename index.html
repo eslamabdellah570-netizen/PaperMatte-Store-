@@ -70,12 +70,35 @@ footer{margin-top:55px;border-top:1px solid #ffffff13;background:#090a11;padding
  .menu-toggle{order:0}
 }
 
+
+/* Official PaperMatte logo proportions, responsive and direction-safe */
+.brand,.footer-brand{direction:ltr!important;unicode-bidi:isolate;display:inline-flex;align-items:center;justify-content:flex-start;flex:0 0 auto;min-width:0;max-width:100%;text-decoration:none;line-height:0}
+.brand .brand-art,.footer-brand .brand-art{display:block;width:236px;height:auto;max-width:100%;overflow:visible}
+.footer-brand .brand-art{width:225px}
+@media(max-width:850px){.brand .brand-art{width:218px}}
+@media(max-width:650px){
+ .brand{width:205px;max-width:calc(100% - 58px);flex:0 1 205px}
+ .brand .brand-art{width:100%;height:auto}
+ .footer-brand .brand-art{width:205px}
+ .menu-toggle{flex:0 0 auto}
+}
+
 </style>
 </head>
 <body>
 <header>
  <div class="container nav">
-  <a class="brand" href="#home"><svg class="brand-mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" aria-hidden="true"><path d="M28 8H76Q91 8 87 24L66 88H17Q5 88 10 73L25 18Q27 10 28 8Z" fill="none" stroke="#ffc900" stroke-width="8" stroke-linejoin="round"/><path d="M79 28L46 69" fill="none" stroke="#ffc900" stroke-width="10" stroke-linecap="round"/><path d="M46 69L39 84L55 76Z" fill="#ffc900"/><path d="M34 84Q44 76 52 85" fill="none" stroke="#ffc900" stroke-width="5" stroke-linecap="round"/></svg><span class="brand-wordmark"><strong>PaperMatte</strong><em>Store</em></span><i class="brand-line" aria-hidden="true"></i></a>
+  <a class="brand" href="#home"><svg class="brand-art" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1250 360" role="img" aria-label="PaperMatte Store">
+<g fill="none" stroke="#ffc900" stroke-linecap="round" stroke-linejoin="round">
+<path d="M112 20H315Q365 20 350 75L303 293Q294 333 251 333H55Q12 333 24 284L72 67Q81 20 112 20Z" stroke-width="19"/>
+<path d="M353 75L190 276" stroke-width="22"/>
+</g>
+<path d="M190 276L169 314L211 291Z" fill="#ffc900"/>
+<path d="M128 317Q148 293 169 316" fill="none" stroke="#ffc900" stroke-width="14" stroke-linecap="round"/>
+<text x="405" y="160" fill="#fff" font-family="Arial, Helvetica, sans-serif" font-size="145" font-style="italic" font-weight="600" letter-spacing="-7">PaperMatte</text>
+<text x="405" y="302" fill="#c7c9d2" font-family="Arial, Helvetica, sans-serif" font-size="142" font-weight="300" letter-spacing="-5">Store</text>
+<path d="M835 282H1215" stroke="#ffc900" stroke-width="12" stroke-linecap="round"/>
+</svg></a>
   <nav id="mainNav"><a href="#home">الرئيسية</a><a href="#products">المنتجات</a><a href="#accessories">الإكسسوارات</a><a href="#offers">العروض</a><a href="#why-us">ليه PaperMatte؟</a><a href="#contact">تواصل معنا</a></nav>
   <label class="site-search" aria-label="البحث في المنتجات"><span>⌕</span><input id="siteSearch" type="search" placeholder="ابحث عن منتج..." autocomplete="off"><kbd>⌕</kbd></label>
   <a class="nav-cta" href="https://wa.me/201024915343?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%B9%D8%A7%D9%8A%D8%B2%20%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%B1%20%D8%B9%D9%86%20%D9%85%D9%86%D8%AA%D8%AC%D8%A7%D8%AA%20PaperMatte%20Store. " target="_blank" rel="noopener">تواصل معنا ↗</a>
@@ -149,7 +172,17 @@ footer{margin-top:55px;border-top:1px solid #ffffff13;background:#090a11;padding
 <footer>
  <div class="container">
   <div class="footer-main">
-   <a class="footer-brand" href="#home"><svg class="brand-mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" aria-hidden="true"><path d="M28 8H76Q91 8 87 24L66 88H17Q5 88 10 73L25 18Q27 10 28 8Z" fill="none" stroke="#ffc900" stroke-width="8" stroke-linejoin="round"/><path d="M79 28L46 69" fill="none" stroke="#ffc900" stroke-width="10" stroke-linecap="round"/><path d="M46 69L39 84L55 76Z" fill="#ffc900"/><path d="M34 84Q44 76 52 85" fill="none" stroke="#ffc900" stroke-width="5" stroke-linecap="round"/></svg><span class="brand-wordmark"><strong>PaperMatte</strong><em>Store</em></span><i class="brand-line" aria-hidden="true"></i></a>
+   <a class="footer-brand" href="#home"><svg class="brand-art" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1250 360" role="img" aria-label="PaperMatte Store">
+<g fill="none" stroke="#ffc900" stroke-linecap="round" stroke-linejoin="round">
+<path d="M112 20H315Q365 20 350 75L303 293Q294 333 251 333H55Q12 333 24 284L72 67Q81 20 112 20Z" stroke-width="19"/>
+<path d="M353 75L190 276" stroke-width="22"/>
+</g>
+<path d="M190 276L169 314L211 291Z" fill="#ffc900"/>
+<path d="M128 317Q148 293 169 316" fill="none" stroke="#ffc900" stroke-width="14" stroke-linecap="round"/>
+<text x="405" y="160" fill="#fff" font-family="Arial, Helvetica, sans-serif" font-size="145" font-style="italic" font-weight="600" letter-spacing="-7">PaperMatte</text>
+<text x="405" y="302" fill="#c7c9d2" font-family="Arial, Helvetica, sans-serif" font-size="142" font-weight="300" letter-spacing="-5">Store</text>
+<path d="M835 282H1215" stroke="#ffc900" stroke-width="12" stroke-linecap="round"/>
+</svg></a>
    <div class="footer-links"><a href="#products">المنتجات</a><a href="#accessories">الإكسسوارات</a><a href="#offers">العروض</a><a href="#why-us">مميزات الشراء</a><a href="https://wa.me/201024915343" target="_blank" rel="noopener">WhatsApp</a></div>
   </div>
   <div class="copyright"><span>© 2026 PaperMatte Store. All rights reserved.</span><span>Made for people who love smart technology.</span></div>
