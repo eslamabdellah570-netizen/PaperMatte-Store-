@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://papermatte-store.pages.dev/sitemap.xml
