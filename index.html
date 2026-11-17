@@ -56,6 +56,9 @@ footer{margin-top:55px;border-top:1px solid #ffffff13;background:#090a11;padding
 #pmProductDetail .detail-kicker{color:#b58aff;font-size:13px;letter-spacing:1px}
 #pmProductDetail h1{font-size:clamp(27px,4vw,42px);line-height:1.3;margin:12px 0}
 #pmProductDetail .detail-description{color:#c8c1d5;line-height:1.9;white-space:normal;margin:18px 0}
+.cheaper-price-note{display:block;width:fit-content;max-width:100%;margin:12px 0 2px;padding:8px 12px;border:1px solid #73529a66;border-radius:12px;background:linear-gradient(110deg,#251936,#172039);color:#e3d4ff;font-size:11px;font-weight:700;line-height:1.7;text-decoration:none;transition:.2s}
+.cheaper-price-note:hover{border-color:#a77ae6;background:linear-gradient(110deg,#302044,#1c2b49);color:#fff}
+#pmProductDetail .detail-cheaper-note{font-size:14px;margin:18px 0 4px;padding:11px 14px}
 #pmProductDetail .detail-specs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:18px 0}
 #pmProductDetail .detail-spec{min-width:0;padding:14px 16px;border:1px solid #39334f;border-radius:16px;background:linear-gradient(145deg,#1b1b2d,#121522);color:#d5d4e2;font-size:15px;line-height:1.8;overflow-wrap:anywhere;box-shadow:inset 0 1px 0 #ffffff08}
 #pmProductDetail .detail-spec::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:linear-gradient(135deg,#b76bff,#4b8dff);margin-left:9px;vertical-align:middle}
@@ -317,18 +320,19 @@ const escHtml = value => String(value ?? "").replace(/[&<>"']/g, c => ({"&":"&am
 const formatPrice = value => Number(value || 0).toLocaleString("en-US") + ' <small>جنيه</small>';
 const categoryLabel = category => ({tablets:"Tablet · أجهزة لوحية",watches:"Smart Watch · ساعة ذكية",accessories:"Accessory · إكسسوار"})[category] || "PaperMatte Store";
 const whatsappLink = (name, price) => "https://wa.me/201024915343?text=" + encodeURIComponent("السلام عليكم، مهتم بـ " + name + " بسعر " + Number(price || 0).toLocaleString("en-US") + " جنيه. ممكن تفاصيل التوافر والطلب؟");
+const cheaperPriceLink = name => "https://wa.me/201024915343?text=" + encodeURIComponent("السلام عليكم، لقيت المنتج " + name + " بسعر أرخص وعايز أبلغكم.");
 function productCard(p) {
  const productUrl = "?product=" + encodeURIComponent(p.id);
  const category = ["tablets","watches","accessories"].includes(p.category) ? p.category : "tablets";
  const name = escHtml(p.name), description = escHtml(p.description || "تواصل معنا لمعرفة تفاصيل المنتج.");
  const href = whatsappLink(p.name, p.price);
  const image = p.image_url ? '<img src="' + escHtml(p.image_url) + '" alt="' + name + '" loading="lazy">' : '<div class="product-placeholder">PaperMatte Store</div>';
- return '<article class="product-card reveal" data-category="' + category + '"><a class="product-image" href="' + productUrl + '" aria-label="تفاصيل ' + name + '">' + image + '<span class="image-arrow">↗</span></a><div class="product-info"><div class="product-kicker">' + categoryLabel(category) + '</div><h3><a href="' + productUrl + '" style="color:inherit;text-decoration:none">' + name + '</a></h3><p>' + description + '</p><div class="product-bottom"><div><span class="price-label">السعر</span><div class="price">' + formatPrice(p.price) + '</div></div><a class="buy-btn" href="' + productUrl + '">عرض التفاصيل <span>↗</span></a></div></div></article>';
+ return '<article class="product-card reveal" data-category="' + category + '"><a class="product-image" href="' + productUrl + '" aria-label="تفاصيل ' + name + '">' + image + '<span class="image-arrow">↗</span></a><div class="product-info"><div class="product-kicker">' + categoryLabel(category) + '</div><h3><a href="' + productUrl + '" style="color:inherit;text-decoration:none">' + name + '</a></h3><p>' + description + '</p><a class="cheaper-price-note" href="' + cheaperPriceLink(p.name) + '" target="_blank" rel="noopener">لو لقيت المنتج ده بسعر أرخص برا بلغنا 🤍</a><div class="product-bottom"><div><span class="price-label">السعر</span><div class="price">' + formatPrice(p.price) + '</div></div><a class="buy-btn" href="' + productUrl + '">عرض التفاصيل <span>↗</span></a></div></div></article>';
 }
 function accessoryCard(p) {
  const productUrl='?product='+encodeURIComponent(p.id);
  const name=escHtml(p.name), description=escHtml(p.description || "تواصل معنا لمعرفة التفاصيل والسعر."), href=whatsappLink(p.name,p.price);
- return '<article class="accessory-card"><div class="accessory-symbol">✦</div><h3><a href="' + productUrl + '" style="color:inherit;text-decoration:none">' + name + '</a></h3><p>' + description + '</p><strong class="price">' + formatPrice(p.price) + '</strong><a href="' + productUrl + '">عرض التفاصيل ↗</a></article>';
+ return '<article class="accessory-card"><div class="accessory-symbol">✦</div><h3><a href="' + productUrl + '" style="color:inherit;text-decoration:none">' + name + '</a></h3><p>' + description + '</p><a class="cheaper-price-note" href="' + cheaperPriceLink(p.name) + '" target="_blank" rel="noopener">لو لقيت المنتج ده بسعر أرخص برا بلغنا 🤍</a><strong class="price">' + formatPrice(p.price) + '</strong><a href="' + productUrl + '">عرض التفاصيل ↗</a></article>';
 }
 
 async function shareCurrentProduct(button){
@@ -349,7 +353,7 @@ function showProductDetail(p){
  const specLines=String(p.description||"تواصل معنا لمعرفة تفاصيل المنتج.").split(String.fromCharCode(10)).map(line=>line.trim()).filter(Boolean);
  const specs=specLines.map(line=>'<div class="detail-spec">'+escHtml((line.startsWith('•')||line.startsWith('▪')||line.startsWith('-')?line.slice(1).trim():line))+'</div>').join("");
  const image=p.image_url?'<img class="detail-image" src="'+escHtml(p.image_url)+'" alt="'+name+'">':'';
- root.innerHTML='<button class="detail-back" onclick="history.back()">← العودة للمتجر</button><main class="detail-wrap"><div>'+image+'</div><section><div class="detail-kicker">'+category+'</div><h1>'+name+'</h1><div class="detail-description"><div class="detail-specs">'+specs+'</div></div><div class="detail-price">'+formatPrice(p.price)+'</div><div class="detail-actions"><a class="detail-buy" href="'+whatsappLink(p.name,p.price)+'" target="_blank" rel="noopener">اطلب عبر واتساب</a><button class="detail-share" type="button" data-product-id="'+escHtml(p.id)+'" data-product-name="'+name+'" onclick="shareCurrentProduct(this)">مشاركة المنتج ↗</button><a class="detail-back" href="/">العودة للمتجر</a></div><span class="share-feedback" aria-live="polite"></span></section></main>';
+ root.innerHTML='<button class="detail-back" onclick="history.back()">← العودة للمتجر</button><main class="detail-wrap"><div>'+image+'</div><section><div class="detail-kicker">'+category+'</div><h1>'+name+'</h1><div class="detail-description"><div class="detail-specs">'+specs+'</div></div><a class="cheaper-price-note detail-cheaper-note" href="'+cheaperPriceLink(p.name)+'" target="_blank" rel="noopener">لو لقيت المنتج ده بسعر أرخص برا بلغنا 🤍</a><div class="detail-price">'+formatPrice(p.price)+'</div><div class="detail-actions"><a class="detail-buy" href="'+whatsappLink(p.name,p.price)+'" target="_blank" rel="noopener">اطلب عبر واتساب</a><button class="detail-share" type="button" data-product-id="'+escHtml(p.id)+'" data-product-name="'+name+'" onclick="shareCurrentProduct(this)">مشاركة المنتج ↗</button><a class="detail-back" href="/">العودة للمتجر</a></div><span class="share-feedback" aria-live="polite"></span></section></main>';
  root.style.display="block";
  document.body.style.overflow="hidden";
  document.title=p.name+" | PaperMatte Store";
