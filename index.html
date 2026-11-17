@@ -346,8 +346,8 @@ function showProductDetail(p){
  const root=document.getElementById("pmProductDetail");
  const category=escHtml(categoryLabel(p.category));
  const name=escHtml(p.name);
- const specLines=String(p.description||"تواصل معنا لمعرفة تفاصيل المنتج.").split(/\\r?\\n/).map(line=>line.trim()).filter(Boolean);
- const specs=specLines.map(line=>'<div class="detail-spec">'+escHtml(line.replace(/^[•▪\\-]\\s*/,''))+'</div>').join("");
+ const specLines=String(p.description||"تواصل معنا لمعرفة تفاصيل المنتج.").split(String.fromCharCode(10)).map(line=>line.trim()).filter(Boolean);
+ const specs=specLines.map(line=>'<div class="detail-spec">'+escHtml((line.startsWith('•')||line.startsWith('▪')||line.startsWith('-')?line.slice(1).trim():line))+'</div>').join("");
  const image=p.image_url?'<img class="detail-image" src="'+escHtml(p.image_url)+'" alt="'+name+'">':'';
  root.innerHTML='<button class="detail-back" onclick="history.back()">← العودة للمتجر</button><main class="detail-wrap"><div>'+image+'</div><section><div class="detail-kicker">'+category+'</div><h1>'+name+'</h1><div class="detail-description"><div class="detail-specs">'+specs+'</div></div><div class="detail-price">'+formatPrice(p.price)+'</div><div class="detail-actions"><a class="detail-buy" href="'+whatsappLink(p.name,p.price)+'" target="_blank" rel="noopener">اطلب عبر واتساب</a><button class="detail-share" type="button" data-product-id="'+escHtml(p.id)+'" data-product-name="'+name+'" onclick="shareCurrentProduct(this)">مشاركة المنتج ↗</button><a class="detail-back" href="/">العودة للمتجر</a></div><span class="share-feedback" aria-live="polite"></span></section></main>';
  root.style.display="block";
