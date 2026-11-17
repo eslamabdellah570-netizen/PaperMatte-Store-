@@ -255,21 +255,23 @@ function accessoryCard(p) {
  return '<article class="accessory-card"><div class="accessory-symbol">✦</div><h3><a href="' + productUrl + '" style="color:inherit;text-decoration:none">' + name + '</a></h3><p>' + description + '</p><strong class="price">' + formatPrice(p.price) + '</strong><a href="' + productUrl + '">عرض التفاصيل ↗</a></article>';
 }
 
-async function shareProduct(p,button){
- const url=window.location.origin+window.location.pathname+'?product='+encodeURIComponent(p.id);
- const shareData={title:p.name+' | PaperMatte Store',text:'شاهد المنتج على PaperMatte Store: '+p.name,url};
+async function shareCurrentProduct(button){
+ const id=button.dataset.productId,name=button.dataset.productName;
+ const url=window.location.origin+window.location.pathname+'?product='+encodeURIComponent(id);
+ const shareData={title:name+' | PaperMatte Store',text:'شاهد المنتج على PaperMatte Store: '+name,url};
  try{
   if(navigator.share){await navigator.share(shareData);}
   else if(navigator.clipboard?.writeText){await navigator.clipboard.writeText(url);button.textContent='تم نسخ لينك المنتج ✓';}
   else{const field=document.createElement('textarea');field.value=url;document.body.appendChild(field);field.select();document.execCommand('copy');field.remove();button.textContent='تم نسخ لينك المنتج ✓';}
- }catch(error){if(error?.name!=='AbortError'){try{await navigator.clipboard.writeText(url);button.textContent='تم نسخ لينك المنتج ✓';}catch(e){button.textContent='تعذر المشاركة — انسخ الرابط من شريط العنوان';}}}
+ }catch(error){if(error?.name!=='AbortError'){try{await navigator.clipboard.writeText(url);button.textContent='تم نسخ لينك المنتج ✓';}catch(e){button.textContent='تعذر النسخ؛ انسخ الرابط من شريط العنوان';}}}
 }
+
 function showProductDetail(p){
  const root=document.getElementById("pmProductDetail");
  const category=escHtml(categoryLabel(p.category));
  const name=escHtml(p.name),description=escHtml(p.description||"تواصل معنا لمعرفة تفاصيل المنتج.");
  const image=p.image_url?'<img class="detail-image" src="'+escHtml(p.image_url)+'" alt="'+name+'">':'';
- root.innerHTML='<button class="detail-back" onclick="history.back()">← العودة للمتجر</button><main class="detail-wrap"><div>'+image+'</div><section><div class="detail-kicker">'+category+'</div><h1>'+name+'</h1><p class="detail-description">'+description+'</p><div class="detail-price">'+formatPrice(p.price)+'</div><div class="detail-actions"><a class="detail-buy" href="'+whatsappLink(p.name,p.price)+'" target="_blank" rel="noopener">اطلب عبر واتساب</a><button class="detail-share" type="button" onclick="shareProduct('+JSON.stringify(p).replace(/'/g, '&#39;')+',this)">مشاركة المنتج ↗</button><a class="detail-back" href="/">العودة للمتجر</a></div><span class="share-feedback" aria-live="polite"></span></section></main>';
+ root.innerHTML='<button class="detail-back" onclick="history.back()">← العودة للمتجر</button><main class="detail-wrap"><div>'+image+'</div><section><div class="detail-kicker">'+category+'</div><h1>'+name+'</h1><p class="detail-description">'+description+'</p><div class="detail-price">'+formatPrice(p.price)+'</div><div class="detail-actions"><a class="detail-buy" href="'+whatsappLink(p.name,p.price)+'" target="_blank" rel="noopener">اطلب عبر واتساب</a><button class="detail-share" type="button" data-product-id="'+escHtml(p.id)+'" data-product-name="'+name+'" onclick="shareCurrentProduct(this)">مشاركة المنتج ↗</button><a class="detail-back" href="/">العودة للمتجر</a></div><span class="share-feedback" aria-live="polite"></span></section></main>';
  root.style.display="block";
  document.body.style.overflow="hidden";
  document.title=p.name+" | PaperMatte Store";
