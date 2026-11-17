@@ -96,6 +96,15 @@ footer{margin-top:55px;border-top:1px solid #ffffff13;background:#090a11;padding
  .hero-art{margin-top:2px}
 }
 
+
+/* Four clear category partitions, including accessories */
+.category-strip{grid-template-columns:repeat(4,minmax(0,1fr))}
+.category{min-width:0;justify-content:flex-start}
+.category>span:last-child{min-width:0}
+.category strong,.category small{overflow-wrap:anywhere}
+@media(max-width:850px){.category-strip{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:650px){.category-strip{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.category{min-height:104px;padding:14px 12px;gap:10px}.category-icon{flex:0 0 42px;width:42px;height:42px}.category strong{font-size:13px}.category small{font-size:10px}}
+
 </style>
 </head>
 <body>
@@ -133,6 +142,7 @@ footer{margin-top:55px;border-top:1px solid #ffffff13;background:#090a11;padding
   <button class="category active" data-filter="all"><span class="category-icon">✦</span><span><strong>كل المنتجات</strong><small>تصفح المجموعة</small></span></button>
   <button class="category" data-filter="tablets"><span class="category-icon">▣</span><span><strong>Tablets</strong><small>تابلت وأجهزة دراسة</small></span></button>
   <button class="category" data-filter="watches"><span class="category-icon">◷</span><span><strong>Smart Watches</strong><small>ساعات ذكية</small></span></button>
+  <button class="category" data-filter="accessories" type="button"><span class="category-icon">✎</span><span><strong>Accessories</strong><small>أقلام وإكسسوارات</small></span></button>
  </div>
  <div class="products-grid" id="productsGrid">
   
@@ -238,7 +248,15 @@ menuToggle.addEventListener('click',()=>nav.classList.toggle('open'));
 nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>nav.classList.remove('open')));
 document.querySelectorAll('.category').forEach(btn=>btn.addEventListener('click',()=>{
  document.querySelectorAll('.category').forEach(b=>b.classList.remove('active'));btn.classList.add('active');
- const filter=btn.dataset.filter;document.querySelectorAll('.product-card').forEach(card=>card.style.display=(filter==='all'||card.dataset.category===filter)?'':'none');
+ const filter=btn.dataset.filter;
+ if(filter==='accessories'){
+  document.querySelectorAll('.product-card').forEach(card=>card.style.display='none');
+  document.getElementById('accessories')?.scrollIntoView({behavior:'smooth',block:'start'});
+ }else{
+  document.querySelectorAll('.product-card').forEach(card=>card.style.display=(filter==='all'||card.dataset.category===filter)?'':'none');
+  document.getElementById('products')?.scrollIntoView({behavior:'smooth',block:'start'});
+ }
+ runSiteSearch();
 }));
 
 const siteSearch=document.getElementById('siteSearch');
