@@ -219,9 +219,9 @@
           $("uploadHint").textContent = "تم رفع الصورة، جاري حفظ رابطها مع المنتج...";
         }
         $("saveBtn").textContent = "جاري حفظ البيانات...";
-        const result = id ? await sb.from("products").update(payload).eq("id", id) : await sb.from("products").insert(payload);
+        const result = id ? await sb.from("products").update(payload).eq("id", id).select("id").single() : await sb.from("products").insert(payload).select("id").single();
         if (result.error) throw new Error("فشل حفظ المنتج: " + result.error.message);
-        const savedQuery = await sb.from("products").select("id,image_url").eq("id", id || result.data?.[0]?.id).maybeSingle();
+        const savedQuery = await sb.from("products").select("id,image_url").eq("id", id || result.data?.id).maybeSingle();
         if (savedQuery.error) throw new Error("تم إرسال الحفظ لكن تعذر التحقق منه: " + savedQuery.error.message);
         if (uploadedImageUrl && savedQuery.data?.image_url !== uploadedImageUrl) throw new Error("الصورة اترفعت، لكن رابطها لم يُثبت في سجل المنتج. جرّب الحفظ مرة أخرى.");
         toast(id ? "تم تحديث المنتج والصورة بنجاح" : "تمت إضافة المنتج والصورة بنجاح");
