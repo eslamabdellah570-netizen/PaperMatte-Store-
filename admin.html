@@ -6,23 +6,231 @@
 <section id="dashboard" class="hidden"><div class="intro"><div><h1>لوحة إدارة المتجر</h1><p class="muted">إدارة المنتجات والأسعار والصور وحالة التوافر — التغييرات تظهر على الموقع المنشور.</p></div><button id="newBtn">＋ إضافة منتج</button></div>
 <div class="stats"><div class="stat"><small>عدد المنتجات</small><b id="count">0</b></div><div class="stat"><small>منتجات متاحة</small><b id="available">0</b></div><div class="stat"><small>واتساب الطلبات</small><b style="font-size:18px">01024915343</b></div></div>
 <div class="layout"><section class="panel"><h2>منتجات المتجر</h2><div class="products" id="products"><p class="muted">جاري التحميل...</p></div></section><section class="panel" id="editor"><h2 id="formTitle">إضافة منتج</h2><form id="productForm"><input type="hidden" id="productId"><label>اسم المنتج</label><input id="name" required maxlength="140" placeholder="مثال: Huawei MatePad"><label>السعر بالجنيه المصري</label><input id="price" type="number" min="0" step="0.01" required placeholder="مثال: 26499"><label>القسم</label><select id="category"><option value="tablets">Tablets</option><option value="watches">Smart Watches</option><option value="accessories">Accessories</option></select><label>وصف المنتج</label><textarea id="description" maxlength="1000" placeholder="اكتب وصفاً مختصراً للمنتج"></textarea><label>رابط الصورة (اختياري)</label><input id="image" type="text" placeholder="https://..."><label>أو ارفع صورة من جهازك مباشرة</label><input id="imageFile" type="file" accept="image/*"><p class="hint" id="uploadHint">اختر صورة وسيتم رفعها تلقائياً إلى مساحة صور المتجر وربطها بالمنتج. الحد الأقصى 5MB.</p><label class="check"><input id="availableInput" type="checkbox" checked> المنتج متاح للبيع</label><div class="form-actions" style="margin-top:16px"><button type="submit" id="saveBtn">حفظ المنتج</button><button type="button" class="secondary" id="clearBtn">تفريغ الحقول</button></div></form><p class="hint">تُحفظ البيانات مباشرة في قاعدة بيانات المتجر. يمكنك رفع الصورة مباشرة من جهازك أو لصق رابط صورة مباشر.</p></section></div></section></main><div class="toast" id="toast"></div>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script>
-const sb=window.supabase.createClient("https://appabnyalsnlqytnklzr.supabase.co","sb_publishable_GUeyao4IsHv8G25Pfnx8nQ_bTDfah9N");const $=id=>document.getElementById(id);let products=[];
-function toast(m){$('toast').textContent=m;$('toast').style.display='block';setTimeout(()=>$('toast').style.display='none',2600)}function money(v){return Number(v||0).toLocaleString('en-US')+' ج.م'}function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function clearForm(){$('productForm').reset();$('productId').value='';$('availableInput').checked=true;$('category').value='tablets';$('formTitle').textContent='إضافة منتج'}
-function render(){
- $('count').textContent=products.length;
- $('available').textContent=products.filter(p=>p.is_active).length;
- $('products').innerHTML=products.map(p=>'<article class="product">'+(p.image_url?'<img class="thumb" src="'+esc(p.image_url)+'" alt="">':'<div class="thumb"></div>')+'<div><h3>'+esc(p.name)+'</h3><div class="price">'+money(p.price)+'</div><div class="status '+(p.is_active?'':'off')+'">'+(p.is_active?'متاح للبيع':'غير متاح حالياً')+'</div><small>'+esc(p.category||'')+'</small></div><div class="actions"><button class="secondary" onclick="copyProductLink(\\''+p.id+'\\')">نسخ الرابط</button><button class="secondary" onclick="editProduct(\\''+p.id+'\\')">تعديل</button><button class="danger" onclick="deleteProduct(\\''+p.id+'\\')">حذف</button></div></article>').join('')||'<p class="muted">لا توجد منتجات</p>';
-}
-async function loadProducts(){const {data,error}=await sb.from('products').select('*').eq('product_type','product').order('created_at',{ascending:false});if(error){toast('تعذر تحميل المنتجات: '+error.message);return}products=data||[];render()}
-window.copyProductLink=async id=>{const url=location.origin+'/product.html?id='+encodeURIComponent(id);try{await navigator.clipboard.writeText(url);toast('تم نسخ رابط المنتج')}catch(e){prompt('انسخ رابط المنتج:',url)}};
-window.editProduct=id=>{const p=products.find(x=>x.id===id);if(!p)return;$('productId').value=p.id;$('name').value=p.name;$('price').value=p.price;$('category').value=p.category||'tablets';$('description').value=p.description||'';$('image').value=p.image_url||'';$('availableInput').checked=!!p.is_active;$('formTitle').textContent='تعديل المنتج';$('editor').scrollIntoView({behavior:'smooth'})};
-window.deleteProduct=async id=>{const p=products.find(x=>x.id===id);if(!p||!confirm('متأكد من حذف '+p.name+'؟'))return;const {error}=await sb.from('products').delete().eq('id',id);if(error){toast('فشل الحذف: '+error.message);return}toast('تم حذف المنتج');await loadProducts();clearForm()};
-$('imageFile').addEventListener('change',async e=>{const file=e.target.files?.[0];if(!file)return;if(!file.type.startsWith('image/')){toast('اختار ملف صورة صالح');e.target.value='';return}if(file.size>5*1024*1024){toast('حجم الصورة أكبر من 5MB');e.target.value='';return}const {data:{session}}=await sb.auth.getSession();if(!session){toast('سجّل الدخول أولاً');return}const ext=(file.name.split('.').pop()||'jpg').toLowerCase().replace(/[^a-z0-9]/g,'')||'jpg';const path='products/'+Date.now()+'-'+Math.random().toString(36).slice(2,8)+'.'+ext;$('uploadHint').textContent='جاري رفع الصورة...';const {error}=await sb.storage.from('product-images').upload(path,file,{contentType:file.type,upsert:false});if(error){$('uploadHint').textContent='تعذر رفع الصورة: '+error.message;toast('فشل رفع الصورة');return}const {data}=sb.storage.from('product-images').getPublicUrl(path);$('image').value=data.publicUrl;$('uploadHint').textContent='تم رفع الصورة بنجاح. احفظ المنتج لتثبيت الرابط.';toast('الصورة اترفعت بنجاح')});
-$('productForm').addEventListener('submit',async e=>{e.preventDefault();const id=$('productId').value;const payload={name:$('name').value.trim(),price:Number($('price').value),category:$('category').value,description:$('description').value.trim(),image_url:$('image').value.trim()||null,is_active:$('availableInput').checked,product_type:'product'};if(!payload.name||!Number.isFinite(payload.price)||payload.price<0){toast('راجع اسم المنتج والسعر');return}$('saveBtn').disabled=true;$('saveBtn').textContent='جاري الحفظ...';const result=id?await sb.from('products').update(payload).eq('id',id):await sb.from('products').insert(payload);$('saveBtn').disabled=false;$('saveBtn').textContent='حفظ المنتج';if(result.error){toast('فشل الحفظ: '+result.error.message);return}toast(id?'تم تحديث المنتج':'تمت إضافة المنتج');clearForm();await loadProducts()});
-$('clearBtn').onclick=clearForm;$('newBtn').onclick=()=>{clearForm();$('editor').scrollIntoView({behavior:'smooth'})};
-async function showDashboard(user){if(user?.app_metadata?.role!=='admin'){await sb.auth.signOut();$('loginError').textContent='هذا الحساب ليس لديه صلاحية مدير.';return}$('authPanel').classList.add('hidden');$('dashboard').classList.remove('hidden');$('logoutBtn').classList.remove('hidden');$('connectionState').textContent='متصل كمدير';await loadProducts()}
-$('loginForm').addEventListener('submit',async e=>{e.preventDefault();$('loginError').textContent='';$('loginBtn').disabled=true;$('loginBtn').textContent='جاري التحقق...';const {data,error}=await sb.auth.signInWithPassword({email:$('email').value.trim(),password:$('password').value});$('loginBtn').disabled=false;$('loginBtn').textContent='تسجيل الدخول';if(error){$('loginError').textContent='تعذر تسجيل الدخول: '+error.message;return}await showDashboard(data.user)});
-$('logoutBtn').onclick=async()=>{await sb.auth.signOut();location.reload()};sb.auth.getSession().then(({data})=>{if(data.session)showDashboard(data.session.user)});
+<script>
+(() => {
+  const SUPABASE_URL = "https://appabnyalsnlqytnklzr.supabase.co";
+  const SUPABASE_KEY = "sb_publishable_GUeyao4IsHv8G25Pfnx8nQ_bTDfah9N";
+  const $ = id => document.getElementById(id);
+  let sb = null, products = [];
+  const setState = (message, ok = false) => {
+    const el = $("connectionState");
+    el.textContent = message;
+    el.style.background = ok ? "#123b2d" : "#281b43";
+    el.style.borderColor = ok ? "#287b59" : "#5d43a7";
+  };
+  function showError(message) { $("loginError").textContent = message; }
+  function toast(message) {
+    $("toast").textContent = message;
+    $("toast").style.display = "block";
+    clearTimeout(toast.timer);
+    toast.timer = setTimeout(() => $("toast").style.display = "none", 3500);
+  }
+  function money(value) { return Number(value || 0).toLocaleString("en-US") + " ج.م"; }
+  function esc(value) {
+    return String(value ?? "").replace(/[&<>"']/g, c => ({
+      "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;"
+    }[c]));
+  }
+  function clearForm() {
+    $("productForm").reset();
+    $("productId").value = "";
+    $("availableInput").checked = true;
+    $("category").value = "tablets";
+    $("formTitle").textContent = "إضافة منتج";
+    $("uploadHint").textContent = "اختر صورة وسيتم رفعها تلقائياً إلى مساحة صور المتجر. الحد الأقصى 5MB.";
+  }
+  function render() {
+    $("count").textContent = products.length;
+    $("available").textContent = products.filter(p => p.is_active).length;
+    $("products").innerHTML = products.map(p => `
+      <article class="product">
+        ${p.image_url ? '<img class="thumb" src="' + esc(p.image_url) + '" alt="">' : '<div class="thumb"></div>'}
+        <div>
+          <h3>${esc(p.name)}</h3>
+          <div class="price">${money(p.price)}</div>
+          <div class="status ${p.is_active ? "" : "off"}">${p.is_active ? "متاح للبيع" : "غير متاح حالياً"}</div>
+          <small>${esc(p.category || "")}</small>
+        </div>
+        <div class="actions">
+          <button type="button" class="secondary" data-action="copy" data-id="${esc(p.id)}">نسخ الرابط</button>
+          <button type="button" class="secondary" data-action="edit" data-id="${esc(p.id)}">تعديل</button>
+          <button type="button" class="danger" data-action="delete" data-id="${esc(p.id)}">حذف</button>
+        </div>
+      </article>`).join("") || '<p class="muted">لا توجد منتجات</p>';
+  }
+  async function loadProducts() {
+    $("products").innerHTML = '<p class="muted">جاري تحميل المنتجات...</p>';
+    const { data, error } = await sb.from("products").select("*").eq("product_type", "product").order("created_at", {ascending:false});
+    if (error) {
+      $("products").innerHTML = '<p class="error">تعذر تحميل المنتجات: ' + esc(error.message) + '</p>';
+      toast("تعذر تحميل المنتجات: " + error.message);
+      return;
+    }
+    products = data || [];
+    render();
+  }
+  async function showDashboard(user) {
+    if (user?.app_metadata?.role !== "admin") {
+      await sb.auth.signOut();
+      $("authPanel").classList.remove("hidden");
+      $("dashboard").classList.add("hidden");
+      $("logoutBtn").classList.add("hidden");
+      showError("تم تسجيل الدخول، لكن الحساب لا يحمل صلاحية مدير (admin). راجع صلاحية المستخدم في Supabase Auth.");
+      return;
+    }
+    $("authPanel").classList.add("hidden");
+    $("dashboard").classList.remove("hidden");
+    $("logoutBtn").classList.remove("hidden");
+    setState("متصل كمدير", true);
+    await loadProducts();
+  }
+  async function copyProductLink(id) {
+    const url = location.origin + "/product.html?id=" + encodeURIComponent(id);
+    try { await navigator.clipboard.writeText(url); toast("تم نسخ رابط المنتج"); }
+    catch (_) { prompt("انسخ رابط المنتج:", url); }
+  }
+  function editProduct(id) {
+    const p = products.find(x => String(x.id) === String(id));
+    if (!p) return;
+    $("productId").value = p.id;
+    $("name").value = p.name || "";
+    $("price").value = p.price ?? "";
+    $("category").value = p.category || "tablets";
+    $("description").value = p.description || "";
+    $("image").value = p.image_url || "";
+    $("availableInput").checked = !!p.is_active;
+    $("formTitle").textContent = "تعديل المنتج";
+    $("editor").scrollIntoView({behavior:"smooth"});
+  }
+  async function deleteProduct(id) {
+    const p = products.find(x => String(x.id) === String(id));
+    if (!p || !confirm("متأكد من حذف " + p.name + "؟")) return;
+    const { error } = await sb.from("products").delete().eq("id", id);
+    if (error) { toast("فشل الحذف: " + error.message); return; }
+    toast("تم حذف المنتج");
+    await loadProducts();
+    clearForm();
+  }
+  async function init() {
+    setState("جاري الاتصال...");
+    const urls = [
+      "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2",
+      "https://unpkg.com/@supabase/supabase-js@2"
+    ];
+    let loaded = false;
+    for (const url of urls) {
+      try {
+        await new Promise((resolve, reject) => {
+          const script = document.createElement("script");
+          script.src = url;
+          script.onload = resolve;
+          script.onerror = () => { script.remove(); reject(new Error("تعذر تحميل مكتبة الاتصال")); };
+          document.head.appendChild(script);
+        });
+        if (window.supabase?.createClient) { loaded = true; break; }
+      } catch (_) {}
+    }
+    if (!loaded) {
+      setState("فشل تحميل الاتصال");
+      showError("تعذر تحميل مكتبة Supabase. تأكد من الإنترنت أو جرّب فتح الصفحة في Chrome ثم حدّثها.");
+      $("loginBtn").disabled = true;
+      return;
+    }
+    try {
+      sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {
+        auth: { persistSession:true, autoRefreshToken:true, detectSessionInUrl:true }
+      });
+    } catch (error) {
+      setState("خطأ في الإعداد");
+      showError("تعذر تهيئة الاتصال: " + error.message);
+      $("loginBtn").disabled = true;
+      return;
+    }
+    setState("جاهز لتسجيل الدخول", true);
+    $("loginForm").addEventListener("submit", async event => {
+      event.preventDefault();
+      showError("");
+      $("loginBtn").disabled = true;
+      $("loginBtn").textContent = "جاري التحقق...";
+      try {
+        const { data, error } = await sb.auth.signInWithPassword({
+          email:$("email").value.trim(),
+          password:$("password").value
+        });
+        if (error) { showError("تعذر تسجيل الدخول: " + error.message); return; }
+        await showDashboard(data.user);
+      } catch (error) {
+        showError("حدث خطأ أثناء تسجيل الدخول: " + (error?.message || "خطأ غير معروف"));
+      } finally {
+        $("loginBtn").disabled = false;
+        $("loginBtn").textContent = "تسجيل الدخول";
+      }
+    });
+    $("products").addEventListener("click", event => {
+      const button = event.target.closest("button[data-action]");
+      if (!button) return;
+      const id = button.dataset.id;
+      if (button.dataset.action === "copy") copyProductLink(id);
+      if (button.dataset.action === "edit") editProduct(id);
+      if (button.dataset.action === "delete") deleteProduct(id);
+    });
+    $("imageFile").addEventListener("change", async event => {
+      const file = event.target.files?.[0];
+      if (!file) return;
+      if (!file.type.startsWith("image/")) { toast("اختار ملف صورة صالح"); event.target.value = ""; return; }
+      if (file.size > 5 * 1024 * 1024) { toast("حجم الصورة أكبر من 5MB"); event.target.value = ""; return; }
+      const { data:{session} } = await sb.auth.getSession();
+      if (!session) { toast("سجّل الدخول أولاً"); return; }
+      const ext = (file.name.split(".").pop() || "jpg").toLowerCase().replace(/[^a-z0-9]/g, "") || "jpg";
+      const path = "products/" + Date.now() + "-" + Math.random().toString(36).slice(2,8) + "." + ext;
+      $("uploadHint").textContent = "جاري رفع الصورة...";
+      const { error } = await sb.storage.from("product-images").upload(path, file, {contentType:file.type, upsert:false});
+      if (error) { $("uploadHint").textContent = "تعذر رفع الصورة: " + error.message; toast("فشل رفع الصورة: " + error.message); return; }
+      const { data } = sb.storage.from("product-images").getPublicUrl(path);
+      $("image").value = data.publicUrl;
+      $("uploadHint").textContent = "تم رفع الصورة بنجاح. احفظ المنتج لتثبيت الرابط.";
+      toast("الصورة اترفعت بنجاح");
+    });
+    $("productForm").addEventListener("submit", async event => {
+      event.preventDefault();
+      const id = $("productId").value;
+      const payload = {
+        name:$("name").value.trim(),
+        price:Number($("price").value),
+        category:$("category").value,
+        description:$("description").value.trim(),
+        image_url:$("image").value.trim() || null,
+        is_active:$("availableInput").checked,
+        product_type:"product"
+      };
+      if (!payload.name || !Number.isFinite(payload.price) || payload.price < 0) { toast("راجع اسم المنتج والسعر"); return; }
+      $("saveBtn").disabled = true;
+      $("saveBtn").textContent = "جاري الحفظ...";
+      try {
+        const result = id ? await sb.from("products").update(payload).eq("id", id) : await sb.from("products").insert(payload);
+        if (result.error) { toast("فشل الحفظ: " + result.error.message); return; }
+        toast(id ? "تم تحديث المنتج" : "تمت إضافة المنتج");
+        clearForm();
+        await loadProducts();
+      } catch (error) {
+        toast("حدث خطأ أثناء الحفظ: " + (error?.message || "خطأ غير معروف"));
+      } finally {
+        $("saveBtn").disabled = false;
+        $("saveBtn").textContent = "حفظ المنتج";
+      }
+    });
+    $("clearBtn").addEventListener("click", clearForm);
+    $("newBtn").addEventListener("click", () => { clearForm(); $("editor").scrollIntoView({behavior:"smooth"}); });
+    $("logoutBtn").addEventListener("click", async () => { await sb.auth.signOut(); location.reload(); });
+    try {
+      const { data, error } = await sb.auth.getSession();
+      if (error) { setState("تعذر فحص الجلسة"); showError("تعذر فحص جلسة الدخول: " + error.message); return; }
+      if (data.session) await showDashboard(data.session.user);
+    } catch (error) {
+      setState("مشكلة اتصال");
+      showError("تعذر الاتصال بخدمة تسجيل الدخول: " + (error?.message || "تحقق من الإنترنت"));
+    }
+  }
+  init();
+})();
 </script></body></html>
