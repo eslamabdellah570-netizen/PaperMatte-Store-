@@ -191,41 +191,5 @@ async function loadStoreProducts(){
 loadStoreProducts();
 </script>
 
-<script>
-const sb = window.supabase.createClient("https://appabnyalsnlqytnklzr.supabase.co","sb_publishable_GUeyao4IsHv8G25Pfnx8nQ_bTDfah9N");
-const money = v => Number(v||0).toLocaleString('en-US')+' <small>ج.م</small>';
-const safe = v => String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-function productCard(p){
- const msg=encodeURIComponent('السلام عليكم، مهتم بـ '+p.name+' بسعر '+Number(p.price).toLocaleString('en-US')+' جنيه. ممكن تفاصيل التوافر والطلب؟');
- const cat=p.category||'tablets';
- return '<article class="product-card" data-category="'+safe(cat)+'"><a class="product-image" href="https://wa.me/201024915343?text='+msg+'" target="_blank" rel="noopener" aria-label="اطلب '+safe(p.name)+' عبر واتساب">'+(p.image_url?'<img src="'+safe(p.image_url)+'" alt="'+safe(p.name)+'" loading="lazy">':'')+'<span class="product-tag">'+(cat==='watches'?'Smart Watch':cat==='accessories'?'Accessory':'Huawei / HONOR')+'</span><span class="image-arrow">↗</span></a><div class="product-info"><div class="product-kicker">PAPERMATTE STORE</div><h3>'+safe(p.name)+'</h3><p>'+safe(p.description||'متاح الآن من PaperMatte Store')+'</p><div class="product-bottom"><div><div class="price-label">السعر</div><div class="price">'+money(p.price)+'</div></div><a class="buy-btn" href="https://wa.me/201024915343?text='+msg+'" target="_blank" rel="noopener">اطلب الآن ↗</a></div></div></article>';
-}
-async function loadStoreProducts(){
- const grid=document.getElementById('productsGrid');
- const {data,error}=await sb.from('products').select('id,name,description,price,image_url,category').eq('is_active',true).eq('product_type','product').order('created_at',{ascending:false});
- if(error){document.getElementById('productsLoading').textContent='تعذر تحميل المنتجات حالياً. تواصل معنا عبر واتساب.';console.error(error);return;}
- grid.innerHTML=data?.length?data.map(productCard).join(''):'<p class="section-sub">لا توجد منتجات متاحة حالياً.</p>';
- if(typeof runSiteSearch==='function')runSiteSearch();
-}
-loadStoreProducts();
-</script>
 
-<script>
-const sb = window.supabase.createClient("https://appabnyalsnlqytnklzr.supabase.co","sb_publishable_GUeyao4IsHv8G25Pfnx8nQ_bTDfah9N");
-const money = v => Number(v||0).toLocaleString('en-US')+' <small>ج.م</small>';
-const safe = v => String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-function productCard(p){
- const msg=encodeURIComponent('السلام عليكم، مهتم بـ '+p.name+' بسعر '+Number(p.price).toLocaleString('en-US')+' جنيه. ممكن تفاصيل التوافر والطلب؟');
- const cat=p.category||'tablets';
- return '<article class="product-card" data-category="'+safe(cat)+'"><a class="product-image" href="https://wa.me/201024915343?text='+msg+'" target="_blank" rel="noopener" aria-label="اطلب '+safe(p.name)+' عبر واتساب">'+(p.image_url?'<img src="'+safe(p.image_url)+'" alt="'+safe(p.name)+'" loading="lazy">':'')+'<span class="product-tag">'+(cat==='watches'?'Smart Watch':cat==='accessories'?'Accessory':'Huawei / HONOR')+'</span><span class="image-arrow">↗</span></a><div class="product-info"><div class="product-kicker">PAPERMATTE STORE</div><h3>'+safe(p.name)+'</h3><p>'+safe(p.description||'متاح الآن من PaperMatte Store')+'</p><div class="product-bottom"><div><div class="price-label">السعر</div><div class="price">'+money(p.price)+'</div></div><a class="buy-btn" href="https://wa.me/201024915343?text='+msg+'" target="_blank" rel="noopener">اطلب الآن ↗</a></div></div></article>';
-}
-async function loadStoreProducts(){
- const grid=document.getElementById('productsGrid');
- const {data,error}=await sb.from('products').select('id,name,description,price,image_url,category').eq('is_active',true).eq('product_type','product').order('created_at',{ascending:false});
- if(error){document.getElementById('productsLoading').textContent='تعذر تحميل المنتجات حالياً. تواصل معنا عبر واتساب.';console.error(error);return;}
- grid.innerHTML=data?.length?data.map(productCard).join(''):'<p class="section-sub">لا توجد منتجات متاحة حالياً.</p>';
- if(typeof runSiteSearch==='function')runSiteSearch();
-}
-loadStoreProducts();
-</script>
 </body></html>
