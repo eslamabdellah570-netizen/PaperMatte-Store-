@@ -358,7 +358,8 @@ async function loadDashboardProducts() {
   if(!Array.isArray(data)||!data.length) return;
   const requestedProduct=new URLSearchParams(location.search).get("product");
   if(requestedProduct){const chosen=data.find(p=>String(p.id)===requestedProduct);if(chosen){showProductDetail(chosen);return;}}
-  const products=data.filter(p=>p.category!=="accessories");
+  // Every active product appears in the main "All Products" catalog; accessories also appear in their dedicated section.
+  const products=data;
   const accessories=data.filter(p=>p.category==="accessories");
   if(products.length) document.getElementById("productsGrid").innerHTML=products.map(productCard).join("");
   if(accessories.length) {
