@@ -11,7 +11,7 @@
   const SUPABASE_URL = "https://appabnyalsnlqytnklzr.supabase.co";
   const SUPABASE_KEY = "sb_publishable_GUeyao4IsHv8G25Pfnx8nQ_bTDfah9N";
   const $ = id => document.getElementById(id);
-  let sb = null, products = [];
+  let sb = null, products = [], selectedImageFile = null;
   const setState = (message, ok = false) => {
     const el = $("connectionState");
     el.textContent = message;
@@ -33,6 +33,8 @@
   }
   function clearForm() {
     $("productForm").reset();
+    selectedImageFile = null;
+    $("imageFile").value = "";
     $("productId").value = "";
     $("availableInput").checked = true;
     $("category").value = "tablets";
@@ -98,6 +100,8 @@
     $("category").value = p.category || "tablets";
     $("description").value = p.description || "";
     $("image").value = p.image_url || "";
+    selectedImageFile = null;
+    $("imageFile").value = "";
     $("availableInput").checked = !!p.is_active;
     $("formTitle").textContent = "تعديل المنتج";
     $("editor").scrollIntoView({behavior:"smooth"});
@@ -174,32 +178,24 @@
       if (button.dataset.action === "edit") editProduct(id);
       if (button.dataset.action === "delete") deleteProduct(id);
     });
-    $("imageFile").addEventListener("change", async event => {
-      const file = event.target.files?.[0];
-      if (!file) return;
-      if (!file.type.startsWith("image/")) { toast("اختار ملف صورة صالح"); event.target.value = ""; return; }
-      if (file.size > 5 * 1024 * 1024) { toast("حجم الصورة أكبر من 5MB"); event.target.value = ""; return; }
-      const { data:{session} } = await sb.auth.getSession();
-      if (!session) { toast("سجّل الدخول أولاً"); return; }
-      const ext = (file.name.split(".").pop() || "jpg").toLowerCase().replace(/[^a-z0-9]/g, "") || "jpg";
-      const path = "products/" + Date.now() + "-" + Math.random().toString(36).slice(2,8) + "." + ext;
-      $("uploadHint").textContent = "جاري رفع الصورة...";
-      const { error } = await sb.storage.from("product-images").upload(path, file, {contentType:file.type, upsert:false});
-      if (error) { $("uploadHint").textContent = "تعذر رفع الصورة: " + error.message; toast("فشل رفع الصورة: " + error.message); return; }
-      const { data } = sb.storage.from("product-images").getPublicUrl(path);
-      $("image").value = data.publicUrl;
-      $("uploadHint").textContent = "تم رفع الصورة بنجاح. احفظ المنتج لتثبيت الرابط.";
-      toast("الصورة اترفعت بنجاح");
+    $("imageFile").addEventListener("change", event => {
+      const file = event.target.files?.[0] || null;
+      if (!file) { selectedImageFile = null; return; }
+      if (!file.type.startsWith("image/")) { toast("اختار ملف صورة صالح"); event.target.value = ""; selectedImageFile = null; return; }
+      if (file.size > 5 * 1024 * 1024) { toast("حجم الصورة أكبر من 5MB"); event.target.value = ""; selectedImageFile = null; return; }
+      selectedImageFile = file;
+      $("uploadHint").textContent = "تم اختيار الصورة. سيتم رفعها وحفظ رابطها عند الضغط على حفظ المنتج.";
     });
     $("productForm").addEventListener("submit", async event => {
       event.preventDefault();
       const id = $("productId").value;
+      let uploadedImageUrl = $("image").value.trim();
       const payload = {
         name:$("name").value.trim(),
         price:Number($("price").value),
         category:$("category").value,
         description:$("description").value.trim(),
-        image_url:$("image").value.trim() || null,
+        image_url:uploadedImageUrl || null,
         is_active:$("availableInput").checked,
         product_type:"product"
       };
@@ -207,9 +203,28 @@
       $("saveBtn").disabled = true;
       $("saveBtn").textContent = "جاري الحفظ...";
       try {
+        if (selectedImageFile) {
+          $("saveBtn").textContent = "جاري رفع الصورة...";
+          const { data:{session}, error:sessionError } = await sb.auth.getSession();
+          if (sessionError || !session) throw new Error("انتهت جلسة الدخول. سجّل الدخول مرة أخرى.");
+          const ext = (selectedImageFile.name.split(".").pop() || "jpg").toLowerCase().replace(/[^a-z0-9]/g, "") || "jpg";
+          const path = "products/" + Date.now() + "-" + Math.random().toString(36).slice(2,8) + "." + ext;
+          const { error:uploadError } = await sb.storage.from("product-images").upload(path, selectedImageFile, {contentType:selectedImageFile.type, upsert:false});
+          if (uploadError) throw new Error("فشل رفع الصورة: " + uploadError.message);
+          const { data:publicData } = sb.storage.from("product-images").getPublicUrl(path);
+          uploadedImageUrl = publicData?.publicUrl || "";
+          if (!uploadedImageUrl) throw new Error("تم رفع الصورة لكن تعذر إنشاء رابطها العام.");
+          payload.image_url = uploadedImageUrl;
+          $("image").value = uploadedImageUrl;
+          $("uploadHint").textContent = "تم رفع الصورة، جاري حفظ رابطها مع المنتج...";
+        }
+        $("saveBtn").textContent = "جاري حفظ البيانات...";
         const result = id ? await sb.from("products").update(payload).eq("id", id) : await sb.from("products").insert(payload);
-        if (result.error) { toast("فشل الحفظ: " + result.error.message); return; }
-        toast(id ? "تم تحديث المنتج" : "تمت إضافة المنتج");
+        if (result.error) throw new Error("فشل حفظ المنتج: " + result.error.message);
+        const savedQuery = await sb.from("products").select("id,image_url").eq("id", id || result.data?.[0]?.id).maybeSingle();
+        if (savedQuery.error) throw new Error("تم إرسال الحفظ لكن تعذر التحقق منه: " + savedQuery.error.message);
+        if (uploadedImageUrl && savedQuery.data?.image_url !== uploadedImageUrl) throw new Error("الصورة اترفعت، لكن رابطها لم يُثبت في سجل المنتج. جرّب الحفظ مرة أخرى.");
+        toast(id ? "تم تحديث المنتج والصورة بنجاح" : "تمت إضافة المنتج والصورة بنجاح");
         clearForm();
         await loadProducts();
       } catch (error) {
