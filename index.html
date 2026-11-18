@@ -49,6 +49,7 @@ footer{margin-top:55px;border-top:1px solid #ffffff13;background:#090a11;padding
 @media(max-width:650px){.nav{height:auto;min-height:72px;flex-wrap:wrap;padding:10px 0}.brand{flex:1}.site-search{order:3;flex:1 0 100%;max-width:none;height:40px}.nav-cta{display:none}nav{top:112px}}
 
 
+.product-card.search-result-focus,.accessory-card.search-result-focus{border-color:#b98aff!important;box-shadow:0 0 0 3px #9d4dff55,0 14px 38px #7b42d955;transform:translateY(-3px)}
 /* Individual product pages */
 #pmProductDetail{display:none;position:fixed;inset:0;z-index:9999;overflow:auto;background:#080612;color:#fff;padding:28px 16px 60px}
 #pmProductDetail .detail-wrap{max-width:1050px;margin:24px auto;display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:center;background:linear-gradient(145deg,#17102b,#0c0a17);border:1px solid #39245c;border-radius:28px;padding:28px}
@@ -351,8 +352,13 @@ function submitSiteSearch(){
  if(!normalizeText(siteSearch?.value||'')) return;
  const firstProduct=[...document.querySelectorAll('.product-card')].find(card=>card.style.display!=='none');
  const firstAccessory=[...document.querySelectorAll('#accessories .accessory-card')].find(card=>card.style.display!=='none');
- const target=firstProduct?document.getElementById('products'):firstAccessory?document.getElementById('accessories'):document.getElementById('products');
- target?.scrollIntoView({behavior:'smooth',block:'start'});
+ const target=firstProduct||firstAccessory;
+ if(!target) return;
+ target.scrollIntoView({behavior:'smooth',block:'center',inline:'nearest'});
+ target.classList.remove('search-result-focus');
+ void target.offsetWidth;
+ target.classList.add('search-result-focus');
+ window.setTimeout(function(){target.classList.remove('search-result-focus');},1800);
 }
 document.getElementById('siteSearchBtn')?.addEventListener('click',submitSiteSearch);
 siteSearch?.addEventListener('keydown',event=>{if(event.key==='Enter'){event.preventDefault();submitSiteSearch();}});
