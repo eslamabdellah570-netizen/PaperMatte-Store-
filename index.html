@@ -336,8 +336,14 @@ function productCard(p) {
 function accessoryCard(p) {
  const productUrl='product.html?id='+encodeURIComponent(p.id);
  const name=escHtml(p.name), description=escHtml(p.description || "تواصل معنا لمعرفة التفاصيل والسعر.");
- const imageUrl=p.image_url ? escHtml(p.image_url) : '';
- const image=imageUrl ? '<a class="accessory-image-wrap" href="' + productUrl + '"><img class="accessory-product-image" src="' + imageUrl + '" alt="' + name + '" loading="lazy" onerror="this.closest(\'.accessory-image-wrap\').classList.add(\'image-failed\')"><span class="accessory-symbol image-fallback">✦</span></a>' : '<div class="accessory-image-wrap no-image"><span class="accessory-symbol">✦</span></div>';
+ const knownImages={
+  "61d56ed7-ade1-4e29-8bdf-a7db255c7910":"https://appabnyalsnlqytnklzr.supabase.co/storage/v1/object/public/product-images/products/1795010762940-8vhmrg.png",
+  "006649af-10b9-4310-afa6-d602086ba0a9":"https://appabnyalsnlqytnklzr.supabase.co/storage/v1/object/public/product-images/products/1795011012841-pldakl.png",
+  "7f553099-38d9-4fbc-a6f0-a631367f3fb7":"https://appabnyalsnlqytnklzr.supabase.co/storage/v1/object/public/product-images/products/1794943800488-l61xj0.jpg",
+  "e47865a3-bebc-416e-9e93-2257881d8ef7":"https://appabnyalsnlqytnklzr.supabase.co/storage/v1/object/public/product-images/products/1794942839993-756vxu.png"
+ };
+ const imageUrl=escHtml(p.image_url || knownImages[String(p.id)] || '');
+ const image=imageUrl ? '<a class="accessory-image-wrap" href="' + productUrl + '"><img class="accessory-product-image" src="' + imageUrl + '" alt="' + name + '" loading="eager" decoding="async" style="display:block!important;visibility:visible!important;opacity:1;width:100%;height:145px;object-fit:contain" onload="this.nextElementSibling.style.display=\'none\'" onerror="this.closest(\'.accessory-image-wrap\').classList.add(\'image-failed\')"><span class="accessory-symbol image-fallback">✦</span></a>' : '<div class="accessory-image-wrap no-image"><span class="accessory-symbol">✦</span></div>';
  return '<article class="accessory-card">' + image + '<h3><a href="' + productUrl + '" style="color:inherit;text-decoration:none">' + name + '</a></h3><p>' + description + '</p><a class="cheaper-price-note" href="' + cheaperPriceLink(p.name) + '" target="_blank" rel="noopener">لو لقيت المنتج ده بسعر أرخص برا بلغنا 🤍</a><strong class="price">' + formatPrice(p.price) + '</strong><a href="' + productUrl + '">عرض التفاصيل ↗</a></article>';
 }
 
