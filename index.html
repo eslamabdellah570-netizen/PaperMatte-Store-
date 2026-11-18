@@ -326,7 +326,7 @@ const categoryLabel = category => ({tablets:"Tablet · أجهزة لوحية",wa
 const whatsappLink = (name, price) => "https://wa.me/201024915343?text=" + encodeURIComponent("السلام عليكم، مهتم بـ " + name + " بسعر " + Number(price || 0).toLocaleString("en-US") + " جنيه. ممكن تفاصيل التوافر والطلب؟");
 const cheaperPriceLink = name => "https://wa.me/201024915343?text=" + encodeURIComponent("السلام عليكم، لقيت المنتج " + name + " بسعر أرخص وعايز أبلغكم.");
 function productCard(p) {
- const productUrl = "?product=" + encodeURIComponent(p.id);
+ const productUrl = "product.html?id=" + encodeURIComponent(p.id);
  const category = ["tablets","watches","accessories"].includes(p.category) ? p.category : "tablets";
  const name = escHtml(p.name), description = escHtml(p.description || "تواصل معنا لمعرفة تفاصيل المنتج.");
  const href = whatsappLink(p.name, p.price);
@@ -334,14 +334,14 @@ function productCard(p) {
  return '<article class="product-card reveal" data-category="' + category + '"><a class="product-image" href="' + productUrl + '" aria-label="تفاصيل ' + name + '">' + image + '<span class="image-arrow">↗</span></a><div class="product-info"><div class="product-kicker">' + categoryLabel(category) + '</div><h3><a href="' + productUrl + '" style="color:inherit;text-decoration:none">' + name + '</a></h3><p>' + description + '</p><div class="product-purchase-points"><span>⚡ الدفع عند الاستلام</span><span>⚡ متاح معاينة المنتج قبل الاستلام</span></div><a class="cheaper-price-note" href="' + cheaperPriceLink(p.name) + '" target="_blank" rel="noopener">لو لقيت المنتج ده بسعر أرخص برا بلغنا 🤍</a><div class="product-bottom"><div><span class="price-label">السعر</span><div class="price">' + formatPrice(p.price) + '</div></div><a class="buy-btn" href="' + productUrl + '">عرض التفاصيل <span>↗</span></a></div></div></article>';
 }
 function accessoryCard(p) {
- const productUrl='?product='+encodeURIComponent(p.id);
+ const productUrl='product.html?id='+encodeURIComponent(p.id);
  const name=escHtml(p.name), description=escHtml(p.description || "تواصل معنا لمعرفة التفاصيل والسعر."), href=whatsappLink(p.name,p.price);
  return '<article class="accessory-card"><div class="accessory-symbol">✦</div><h3><a href="' + productUrl + '" style="color:inherit;text-decoration:none">' + name + '</a></h3><p>' + description + '</p><a class="cheaper-price-note" href="' + cheaperPriceLink(p.name) + '" target="_blank" rel="noopener">لو لقيت المنتج ده بسعر أرخص برا بلغنا 🤍</a><strong class="price">' + formatPrice(p.price) + '</strong><a href="' + productUrl + '">عرض التفاصيل ↗</a></article>';
 }
 
 async function shareCurrentProduct(button){
  const id=button.dataset.productId,name=button.dataset.productName;
- const url=window.location.origin+window.location.pathname+'?product='+encodeURIComponent(id);
+ const url=window.location.origin+window.location.pathname.replace(/[^/]*$/, 'product.html')+'?id='+encodeURIComponent(id);
  const shareData={title:name+' | PaperMatte Store',text:'شاهد المنتج على PaperMatte Store: '+name,url};
  try{
   if(navigator.share){await navigator.share(shareData);}
