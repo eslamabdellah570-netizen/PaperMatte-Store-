@@ -292,39 +292,40 @@ document.querySelectorAll('.category').forEach(btn=>btn.addEventListener('click'
 }));
 
 const siteSearch=document.getElementById('siteSearch');
-const normalizeText=value=>String(value||'').toLocaleLowerCase('ar')
- .replace(/[\\u064B-\\u065F\\u0670\\u0640]/g,'')
+const normalizeText=value=>String(value||'').normalize('NFKC').toLocaleLowerCase('ar')
+ .replace(/[\u064B-\u065F\u0670\u0640]/g,'')
  .replace(/[أإآ]/g,'ا').replace(/ى/g,'ي').replace(/ة/g,'ه')
- .replace(/[‐‑‒–—_.,،؛:!?؟()[\\]{}"'`]/g,' ')
- .replace(/\\s+/g,' ').trim();
-const searchAliases=[
- ['هواوي','huawei'],['هواوى','huawei'],['واوي','huawei'],
- ['هونر','honor'],['اونر','honor'],
- ['ميتباد','matepad'],['ميت باد','matepad'],['ميت باد برو','matepad pro'],
- ['ماجيك باد','magicpad'],['ماجيكباد','magicpad'],
- ['قلم','pencil','stylus'],['استايلس','stylus'],['ستايلس','stylus'],
- ['كيبورد','keyboard'],['كفر','case','cover'],['جراب','case','cover'],
- ['شاحن','charger'],['بطاريه','battery'],['بطارية','battery'],
- ['تابلت','tablet'],['تابليت','tablet'],['ايباد','ipad'],
- ['برو','pro'],['جيل تالت','3rd gen'],['الجيل الثالث','3rd gen']
-];
+ .replace(/[^\p{L}\p{N}]+/gu,' ').replace(/\s+/g,' ').trim();
+const searchAliases={
+ 'هواوي':['huawei'],'هواوى':['huawei'],'واوي':['huawei'],
+ 'هونر':['honor'],'اونر':['honor'],
+ 'قلم':['pencil','stylus'],'اقلام':['pencil','stylus'],'استايلس':['stylus'],'ستايلس':['stylus'],
+ 'كيبورد':['keyboard'],'كفر':['case','cover'],'جراب':['case','cover'],
+ 'شاحن':['charger'],'بطاريه':['battery'],'بطارية':['battery'],
+ 'تابلت':['tablet'],'تابليت':['tablet'],'ايباد':['ipad'],
+ 'برو':['pro'],'ماجيك':['magic'],'باد':['pad'],
+ 'ميتباد':['matepad'],'ميت':['matepad'],
+ 'الجيل':['gen'],'تالت':['3rd'],'الثالث':['3rd']
+};
 function searchTerms(value){
- const normalized=normalizeText(value);
- return normalized.split(' ').filter(Boolean).map(word=>{
-  const group=searchAliases.find(items=>items.some(alias=>normalizeText(alias)===word));
-  return group?group.map(normalizeText):[word];
- });
+ const normalized=normalizeText(value)
+  .replace(/ميت\s+باد\s+برو/g,'matepad pro')
+  .replace(/ميت\s+باد/g,'matepad')
+  .replace(/ميت\s+باد/g,'matepad')
+  .replace(/ماجيك\s+باد/g,'magicpad');
+ return normalized.split(' ').filter(Boolean).map(word=>searchAliases[word]||[word]);
 }
 function searchableCardText(card){
- return normalizeText(card.innerText+' '+[...card.querySelectorAll('img')].map(img=>img.alt||'').join(' '));
+ return normalizeText((card.innerText||card.textContent||'')+' '+[...card.querySelectorAll('img')].map(img=>img.alt||'').join(' '));
 }
 function matchesSearch(card,groups){
  if(!groups.length) return true;
  const haystack=searchableCardText(card);
- return groups.every(group=>group.some(term=>haystack.includes(term)));
+ return groups.every(group=>group.some(term=>haystack.includes(normalizeText(term))));
 }
 function runSiteSearch(){
- const groups=searchTerms(siteSearch?.value||'');
+ if(!siteSearch) return;
+ const groups=searchTerms(siteSearch.value);
  const hasTerm=groups.length>0;
  const activeCategory=hasTerm?'all':(document.querySelector('.category.active')?.dataset.filter||'all');
  const products=[...document.querySelectorAll('.product-card')];
@@ -344,11 +345,10 @@ function runSiteSearch(){
  if(productEmpty) productEmpty.style.display=(hasTerm&&productMatches===0&&activeCategory!=='accessories')?'block':'none';
  if(accessoriesEmpty) accessoriesEmpty.style.display=(hasTerm&&accessoryMatches===0&&(activeCategory==='all'||activeCategory==='accessories'))?'block':'none';
 }
-siteSearch.addEventListener('input',runSiteSearch);
+siteSearch?.addEventListener('input',runSiteSearch);
 function submitSiteSearch(){
  runSiteSearch();
- const term=normalizeText(siteSearch?.value||'');
- if(!term) return;
+ if(!normalizeText(siteSearch?.value||'')) return;
  const firstProduct=[...document.querySelectorAll('.product-card')].find(card=>card.style.display!=='none');
  const firstAccessory=[...document.querySelectorAll('#accessories .accessory-card')].find(card=>card.style.display!=='none');
  const target=firstProduct?document.getElementById('products'):firstAccessory?document.getElementById('accessories'):document.getElementById('products');
@@ -356,7 +356,6 @@ function submitSiteSearch(){
 }
 document.getElementById('siteSearchBtn')?.addEventListener('click',submitSiteSearch);
 siteSearch?.addEventListener('keydown',event=>{if(event.key==='Enter'){event.preventDefault();submitSiteSearch();}});
-
 document.querySelectorAll('.category').forEach(btn=>btn.addEventListener('click',runSiteSearch));
 const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');observer.unobserve(entry.target)}}),{threshold:.08});
 document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
