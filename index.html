@@ -20,7 +20,7 @@ header{position:sticky;top:0;z-index:50;background:#090a12d9;backdrop-filter:blu
 .accessories-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
 .accessory-card{position:relative;overflow:hidden;display:flex;flex-direction:column;gap:12px;padding:20px;border:1px solid #292d42;border-radius:20px;background:linear-gradient(145deg,#191a2b,#10121d);transition:.22s;min-height:205px}
 .accessory-card:before{content:"";position:absolute;width:125px;height:125px;border-radius:50%;background:#8b43ec22;filter:blur(35px);top:-55px;left:-35px}
-.accessory-card:hover{transform:translateY(-5px);border-color:#7952bd}
+.accessory-card:hover{transform:translateY(-5px);border-color:#7952bd}.accessory-image-wrap{position:relative;display:grid;place-items:center;width:100%;height:145px;overflow:hidden;border-radius:14px;background:radial-gradient(ellipse at center,#29203f,#141725 72%);text-decoration:none}.accessory-product-image{display:block;width:100%;height:100%;padding:7px;box-sizing:border-box;object-fit:contain}.accessory-image-wrap .image-fallback{display:none}.accessory-image-wrap.image-failed .accessory-product-image{display:none}.accessory-image-wrap.image-failed .image-fallback{display:grid}.accessory-image-wrap.no-image{height:70px;background:transparent}.accessory-image-wrap.no-image .accessory-symbol{width:54px;height:54px}
 .accessory-symbol{position:relative;display:grid;place-items:center;width:54px;height:54px;border-radius:16px;background:linear-gradient(135deg,#913fe6,#286fe9);font-size:25px;box-shadow:0 10px 25px #5532a744}
 .accessory-card h3{position:relative;margin:0;font-size:16px}
 .accessory-card p{position:relative;margin:0;color:var(--muted);font-size:12px;flex:1}
@@ -335,8 +335,10 @@ function productCard(p) {
 }
 function accessoryCard(p) {
  const productUrl='product.html?id='+encodeURIComponent(p.id);
- const name=escHtml(p.name), description=escHtml(p.description || "تواصل معنا لمعرفة التفاصيل والسعر."), href=whatsappLink(p.name,p.price);
- return '<article class="accessory-card"><div class="accessory-symbol">✦</div><h3><a href="' + productUrl + '" style="color:inherit;text-decoration:none">' + name + '</a></h3><p>' + description + '</p><a class="cheaper-price-note" href="' + cheaperPriceLink(p.name) + '" target="_blank" rel="noopener">لو لقيت المنتج ده بسعر أرخص برا بلغنا 🤍</a><strong class="price">' + formatPrice(p.price) + '</strong><a href="' + productUrl + '">عرض التفاصيل ↗</a></article>';
+ const name=escHtml(p.name), description=escHtml(p.description || "تواصل معنا لمعرفة التفاصيل والسعر.");
+ const imageUrl=p.image_url ? escHtml(p.image_url) : '';
+ const image=imageUrl ? '<a class="accessory-image-wrap" href="' + productUrl + '"><img class="accessory-product-image" src="' + imageUrl + '" alt="' + name + '" loading="lazy" onerror="this.closest(\'.accessory-image-wrap\').classList.add(\'image-failed\')"><span class="accessory-symbol image-fallback">✦</span></a>' : '<div class="accessory-image-wrap no-image"><span class="accessory-symbol">✦</span></div>';
+ return '<article class="accessory-card">' + image + '<h3><a href="' + productUrl + '" style="color:inherit;text-decoration:none">' + name + '</a></h3><p>' + description + '</p><a class="cheaper-price-note" href="' + cheaperPriceLink(p.name) + '" target="_blank" rel="noopener">لو لقيت المنتج ده بسعر أرخص برا بلغنا 🤍</a><strong class="price">' + formatPrice(p.price) + '</strong><a href="' + productUrl + '">عرض التفاصيل ↗</a></article>';
 }
 
 async function shareCurrentProduct(button){
