@@ -292,25 +292,30 @@ document.querySelectorAll('.category').forEach(btn=>btn.addEventListener('click'
 }));
 
 const siteSearch=document.getElementById('siteSearch');
-const normalizeText=value=>value.toLocaleLowerCase('ar').replace(/[\u064B-\u065F\u0670]/g,'').trim();
+const normalizeText=value=>String(value||'').toLocaleLowerCase('ar')
+ .replace(/[\\u064B-\\u065F\\u0670\\u0640]/g,'')
+ .replace(/[أإآ]/g,'ا').replace(/ى/g,'ي').replace(/ة/g,'ه').trim();
 function runSiteSearch(){
- const term=normalizeText(siteSearch.value);
+ const term=normalizeText(siteSearch?.value||'');
  const activeCategory=document.querySelector('.category.active')?.dataset.filter||'all';
  const products=[...document.querySelectorAll('.product-card')];
- const accessories=[...document.querySelectorAll('.accessory-card')];
+ const accessories=[...document.querySelectorAll('#accessories .accessory-card')];
  let productMatches=0,accessoryMatches=0;
  products.forEach(card=>{
-  const categoryMatch=activeCategory==='all'||card.dataset.category===activeCategory;
+  const categoryMatch=activeCategory==='all'||activeCategory==='accessories'||card.dataset.category===activeCategory;
   const textMatch=!term||normalizeText(card.innerText).includes(term);
-  const show=categoryMatch&&textMatch;
+  const show=categoryMatch&&textMatch&&activeCategory!=='accessories';
   card.style.display=show?'':'none';if(show)productMatches++;
  });
  accessories.forEach(card=>{
-  const show=!term||normalizeText(card.innerText).includes(term);
+  const textMatch=!term||normalizeText(card.innerText).includes(term);
+  const show=(activeCategory==='all'||activeCategory==='accessories')&&textMatch;
   card.style.display=show?'':'none';if(show)accessoryMatches++;
  });
- document.getElementById('productsEmpty').style.display=productMatches?'none':'block';
- document.getElementById('accessoriesEmpty').style.display=accessoryMatches?'none':'block';
+ const productEmpty=document.getElementById('productsEmpty');
+ const accessoriesEmpty=document.getElementById('accessoriesEmpty');
+ if(productEmpty) productEmpty.style.display=(term&&productMatches===0&&activeCategory!=='accessories')?'block':'none';
+ if(accessoriesEmpty) accessoriesEmpty.style.display=(term&&accessoryMatches===0&&(activeCategory==='all'||activeCategory==='accessories'))?'block':'none';
 }
 siteSearch.addEventListener('input',runSiteSearch);
 document.querySelectorAll('.category').forEach(btn=>btn.addEventListener('click',runSiteSearch));
