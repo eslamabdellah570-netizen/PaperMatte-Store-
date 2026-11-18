@@ -43,7 +43,7 @@ export async function onRequest() {
   const urls = [
     { loc: base + "/", lastmod: new Date().toISOString().slice(0, 10) },
     ...products.map(product => ({
-      loc: base + "/product.html?id=" + encodeURIComponent(product.id),
+      loc: base + "/product?id=" + encodeURIComponent(product.id),
       lastmod: product.updated_at ? new Date(product.updated_at).toISOString().slice(0, 10) : null
     }))
   ];
