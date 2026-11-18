@@ -135,6 +135,89 @@ footer{margin-top:55px;border-top:1px solid #ffffff13;background:#090a11;padding
  .category-strip>.category small{font-size:11px}
 }
 
+
+/* Responsive layout pass: phones, tablets, laptops and large desktops */
+html,body{width:100%;max-width:100%;overflow-x:hidden}
+img,video,iframe{max-width:100%}
+.container{width:min(1240px,calc(100% - 48px))}
+.products-grid,.accessories-grid,.category-strip{min-width:0}
+.product-card,.accessory-card,.category,.benefit,.about-panel{min-width:0}
+.product-info h3,.product-info p,.accessory-card h3,.accessory-card p{overflow-wrap:anywhere}
+.product-bottom{flex-wrap:wrap;align-items:center}
+.product-bottom .buy-btn{max-width:100%;justify-content:center}
+.hero-copy,.hero-art{min-width:0}
+.site-search{min-width:0}
+@media(min-width:1500px){
+ .container{width:min(1380px,calc(100% - 96px))}
+ .products-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:22px}
+ .accessories-grid{grid-template-columns:repeat(5,minmax(0,1fr));gap:18px}
+ .hero{gap:64px;padding-top:92px;padding-bottom:82px}
+ .hero-art{height:500px}
+}
+@media(min-width:1101px) and (max-width:1499px){
+ .products-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .accessories-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+}
+@media(min-width:851px) and (max-width:1100px){
+ .container{width:calc(100% - 40px)}
+ .nav{gap:14px}
+ nav{gap:14px;font-size:13px}
+ .site-search{max-width:190px}
+ .hero{grid-template-columns:1fr 1fr;gap:24px;padding:58px 0}
+ .hero-art{height:360px}
+ .products-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .accessories-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .category-strip{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(min-width:651px) and (max-width:850px){
+ .container{width:calc(100% - 36px)}
+ .nav{height:auto;min-height:74px;flex-wrap:wrap;padding:12px 0}
+ .brand{flex:1}
+ .site-search{order:3;flex:1 0 100%;max-width:none}
+ nav{gap:12px;flex-wrap:wrap}
+ .hero{grid-template-columns:1fr;min-height:0;padding:48px 0 40px;gap:28px}
+ .hero-copy{text-align:center}
+ .hero-copy>p{margin-inline:auto}
+ .hero-actions,.trust-row{justify-content:center}
+ .hero-art{height:380px;width:100%}
+ .products-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+ .product-card:last-child{grid-column:auto;max-width:none;justify-self:stretch}
+ .product-image{height:clamp(190px,30vw,270px)}
+ .accessories-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .category-strip{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ .category-strip>.category{min-height:92px;padding:14px}
+ .category-strip>.category .category-icon{flex-basis:46px;width:46px;height:46px}
+}
+@media(max-width:650px){
+ .container{width:calc(100% - 28px)}
+ .products-grid{grid-template-columns:minmax(0,1fr)}
+ .product-card:last-child{grid-column:auto;max-width:none;justify-self:stretch}
+ .product-bottom{align-items:center}
+ .product-image{height:clamp(210px,68vw,300px)}
+ .accessories-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .category-strip{grid-template-columns:minmax(0,1fr)!important}
+ .section-head{min-width:0}
+ .promo,.about-panel{min-width:0}
+ .about-points{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .footer-links{gap:12px}
+ .whatsapp-float{max-width:calc(100vw - 26px)}
+}
+@media(max-width:380px){
+ .container{width:calc(100% - 22px)}
+ .brand span{font-size:13px}
+ .category-strip>.category{padding:13px 14px}
+ .accessories-grid{grid-template-columns:minmax(0,1fr)}
+ .product-bottom{align-items:flex-start;flex-direction:column}
+ .product-bottom .buy-btn{width:100%}
+ .about-points{grid-template-columns:minmax(0,1fr)}
+ .hero-art{height:270px}
+}
+@media(orientation:landscape) and (max-height:500px) and (max-width:950px){
+ .hero{min-height:0;padding:28px 0;grid-template-columns:1fr 1fr}
+ .hero-art{height:260px}
+ .hero-product img{height:210px}
+}
+
 </style>
 <!-- Cloudflare Web Analytics -->
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"1cfd82e11cee4da9b9ff2dfa4ade48ee"}'></script>
