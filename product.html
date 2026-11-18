@@ -26,7 +26,7 @@ function formatSpecs(description){
 const {data:p,error}=await sb.from('products').select('id,name,description,price,image_url,category,is_active').eq('id',id).eq('product_type','product').maybeSingle();
 if(error||!p||!p.is_active){document.getElementById('content').innerHTML='<div class="error">المنتج غير متاح أو لم يعد موجوداً. <a href="index.html">تصفح منتجات المتجر</a></div>';return}
 const message=encodeURIComponent('السلام عليكم، مهتم بـ '+p.name+' بسعر '+Number(p.price).toLocaleString('en-US')+' جنيه. ممكن تفاصيل التوافر والطلب؟');document.title=p.name+' | PaperMatte Store';
-const seoDescription=(p.name+' — '+(p.description||'متاح الآن من PaperMatte Store')).replace(/\\s+/g,' ').slice(0,300);
+const seoDescription=(p.name+' — '+(p.description||'متاح الآن من PaperMatte Store')).replace(/\s+/g,' ').slice(0,300);
 document.querySelector('meta[name="description"]').content=seoDescription;
 const canonicalUrl=location.origin+location.pathname+'?id='+encodeURIComponent(p.id);
 let canonical=document.querySelector('link[rel="canonical"]');
