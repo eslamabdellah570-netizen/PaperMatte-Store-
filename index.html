@@ -513,9 +513,13 @@ async function loadDashboardProducts() {
   if(!Array.isArray(data)||!data.length) return;
   const requestedProduct=new URLSearchParams(location.search).get("product");
   if(requestedProduct){const chosen=data.find(p=>String(p.id)===requestedProduct);if(chosen){showProductDetail(chosen);return;}}
-  // Every active product appears in the main "All Products" catalog; accessories also appear in their dedicated section.
-  const products=data;
-  const accessories=data.filter(p=>p.category==="accessories");
+  // Keep tablets first, then sort each category from lowest to highest price.
+  const categoryOrder={tablets:0,watches:1,accessories:2};
+  const byStoreOrder=(a,b)=>(categoryOrder[a.category]??3)-(categoryOrder[b.category]??3)
+    || Number(a.price||0)-Number(b.price||0)
+    || String(a.name||"").localeCompare(String(b.name||""));
+  const products=[...data].sort(byStoreOrder);
+  const accessories=data.filter(p=>p.category==="accessories").sort((a,b)=>Number(a.price||0)-Number(b.price||0));
   if(products.length) document.getElementById("productsGrid").innerHTML=products.map(productCard).join("");
   if(accessories.length) {
    const grid=document.querySelector("#accessories .accessories-grid");
