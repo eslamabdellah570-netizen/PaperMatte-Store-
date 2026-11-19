@@ -271,6 +271,19 @@ img,video,iframe{max-width:100%}
  .accessories-bottom-art{height:135px;margin-top:17px;border-radius:20px}
 }
 
+
+/* Dedicated accessory category destinations */
+.accessory-group-section{scroll-margin-top:105px;margin:30px 0 38px}
+.accessory-group-section[hidden]{display:none!important}
+.accessory-group-heading{display:flex;align-items:center;gap:15px;margin:0 0 18px;padding-bottom:14px;border-bottom:1px solid #ffffff18}
+.accessory-group-heading>span{display:grid;place-items:center;width:42px;height:42px;border-radius:14px;background:linear-gradient(135deg,#772be5,#286eea);font-weight:900;color:#fff;font-size:13px;box-shadow:0 8px 24px #6b2bd344}
+.accessory-group-heading h3{margin:0;color:#fff;font-size:22px;font-weight:900}
+.accessory-group-heading p{margin:3px 0 0;color:#aeb3c8;font-size:12px}
+.accessory-group-empty{grid-column:1/-1;padding:18px;border:1px dashed #39334f;border-radius:16px;color:#aeb3c8;text-align:center}
+.accessory-category{cursor:pointer;text-decoration:none}
+.accessory-category:focus-visible{outline:2px solid #a96aff;outline-offset:3px}
+html{scroll-behavior:smooth}
+
 /* Emergency visibility fallback: never hide storefront content if scripts fail */
 .reveal,.reveal.visible{opacity:1!important;transform:none!important;visibility:visible!important}
 #productsGrid:empty{min-height:0}
@@ -408,12 +421,12 @@ img,video,iframe{max-width:100%}
   <img src="/assets/accessories-neon.svg" alt="تشكيلة إكسسوارات تشمل جراب تابلت ثلاثي الطيات وكيبورد وماوس وشاحن ووصلة USB" loading="eager" decoding="async">
  </a>
  <div class="accessory-categories" role="navigation" aria-label="أقسام الإكسسوارات">
-  <a class="accessory-category active" href="#accessoriesGrid"><span class="accessory-category-icon"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><path d="M9 5h6M10.5 18.5h3"/></svg></span><span>Cases &amp; Covers</span></a>
-  <a class="accessory-category" href="#accessoriesGrid"><span class="accessory-category-icon"><svg viewBox="0 0 24 24"><path d="m14 4 6 6M4 20l4.5-1 11-11a2.8 2.8 0 0 0-4-4l-11 11L4 20Z"/><path d="m13 5 6 6"/></svg></span><span>Pens &amp; Stylus</span></a>
-  <a class="accessory-category" href="#accessoriesGrid"><span class="accessory-category-icon"><svg viewBox="0 0 24 24"><rect x="6" y="7" width="12" height="14" rx="2"/><path d="M9 2v5m6-5v5m-3 5v4"/></svg></span><span>Chargers</span></a>
-  <a class="accessory-category" href="#accessoriesGrid"><span class="accessory-category-icon"><svg viewBox="0 0 24 24"><path d="M8 3v6a4 4 0 0 0 8 0V3M6 3v4m4-4v4m4-4v4m4-4v4M12 13v8"/></svg></span><span>Cables &amp; Hubs</span></a>
-  <a class="accessory-category" href="#accessoriesGrid"><span class="accessory-category-icon"><svg viewBox="0 0 24 24"><path d="M12 2C7 2 5 6 5 11v3a7 7 0 0 0 14 0v-3c0-5-2-9-7-9Z"/><path d="M12 2v7m-7 0h14"/></svg></span><span>Mice &amp; Keyboards</span></a>
-  <a class="accessory-category" href="#accessoriesGrid"><span class="accessory-category-icon"><svg viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M7 5h10M7 18h10"/></svg></span><span>Screen Protectors</span></a>
+  <a class="accessory-category active" href="#accessory-cases"><span class="accessory-category-icon"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><path d="M9 5h6M10.5 18.5h3"/></svg></span><span>Cases &amp; Covers</span></a>
+  <a class="accessory-category" href="#accessory-pens"><span class="accessory-category-icon"><svg viewBox="0 0 24 24"><path d="m14 4 6 6M4 20l4.5-1 11-11a2.8 2.8 0 0 0-4-4l-11 11L4 20Z"/><path d="m13 5 6 6"/></svg></span><span>Pens &amp; Stylus</span></a>
+  <a class="accessory-category" href="#accessory-chargers"><span class="accessory-category-icon"><svg viewBox="0 0 24 24"><rect x="6" y="7" width="12" height="14" rx="2"/><path d="M9 2v5m6-5v5m-3 5v4"/></svg></span><span>Chargers</span></a>
+  <a class="accessory-category" href="#accessory-cables"><span class="accessory-category-icon"><svg viewBox="0 0 24 24"><path d="M8 3v6a4 4 0 0 0 8 0V3M6 3v4m4-4v4m4-4v4m4-4v4M12 13v8"/></svg></span><span>Cables &amp; Hubs</span></a>
+  <a class="accessory-category" href="#accessory-mice"><span class="accessory-category-icon"><svg viewBox="0 0 24 24"><path d="M12 2C7 2 5 6 5 11v3a7 7 0 0 0 14 0v-3c0-5-2-9-7-9Z"/><path d="M12 2v7m-7 0h14"/></svg></span><span>Mice &amp; Keyboards</span></a>
+  <a class="accessory-category" href="#accessory-protectors"><span class="accessory-category-icon"><svg viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M7 5h10M7 18h10"/></svg></span><span>Screen Protectors</span></a>
  </div>
  <article class="accessory-feature">
   <div class="accessory-feature-art"><img src="/assets/tablet-case-feature.svg" alt="جراب تابلت ثلاثي الطيات بتصميم أنيق" loading="lazy" decoding="async"></div>
@@ -427,11 +440,13 @@ img,video,iframe{max-width:100%}
  <a class="accessories-bottom-art" href="#accessoriesGrid" aria-label="تصفح جميع الإكسسوارات">
   <img src="/assets/accessories-neon.svg" alt="تشكيلة متنوعة من إكسسوارات التابلت" loading="lazy" decoding="async">
  </a>
- <div class="accessories-grid" id="accessoriesGrid">
-  <div class="accessory-card" id="accessoriesEmpty">
-   <h3>إكسسوارات PaperMatte Store</h3>
-   <p>جاري تحميل الإكسسوارات المتاحة...</p>
-  </div>
+ <div class="accessory-sections" id="accessorySections">
+  <section class="accessory-group-section" id="accessory-cases"><div class="accessory-group-heading"><span>01</span><div><h3>Cases &amp; Covers</h3><p>كفرات وجرابات التابلت</p></div></div><div class="accessories-grid"></div></section>
+  <section class="accessory-group-section" id="accessory-pens"><div class="accessory-group-heading"><span>02</span><div><h3>Pens &amp; Stylus</h3><p>الأقلام الذكية والسنون</p></div></div><div class="accessories-grid"></div></section>
+  <section class="accessory-group-section" id="accessory-chargers"><div class="accessory-group-heading"><span>03</span><div><h3>Chargers</h3><p>الشواحن ومحولات الطاقة</p></div></div><div class="accessories-grid"></div></section>
+  <section class="accessory-group-section" id="accessory-cables"><div class="accessory-group-heading"><span>04</span><div><h3>Cables &amp; Hubs</h3><p>الكابلات والوصلات</p></div></div><div class="accessories-grid"></div></section>
+  <section class="accessory-group-section" id="accessory-mice"><div class="accessory-group-heading"><span>05</span><div><h3>Mice &amp; Keyboards</h3><p>الماوس ولوحات المفاتيح</p></div></div><div class="accessories-grid"></div></section>
+  <section class="accessory-group-section" id="accessory-protectors"><div class="accessory-group-heading"><span>06</span><div><h3>Screen Protectors</h3><p>حماية الشاشة</p></div></div><div class="accessories-grid"></div></section>
  </div>
 </section>
 
@@ -650,10 +665,28 @@ async function loadDashboardProducts() {
   const products=[...data].sort(byStoreOrder);
   const accessories=data.filter(p=>p.category==="accessories").sort((a,b)=>Number(a.price||0)-Number(b.price||0));
   if(products.length) document.getElementById("productsGrid").innerHTML=products.map(productCard).join("");
-  if(accessories.length) {
-   const grid=document.querySelector("#accessories .accessories-grid");
-   if(grid) grid.innerHTML=accessories.map(accessoryCard).join("");
-  }
+  const accessoryGroups=[
+   {id:"cases",match:/case|cover|folio|tri.?fold|جراب|كفر|غلاف|حافظة|حماي[ةه] للتابلت/iu},
+   {id:"pens",match:/pen|pencil|stylus|مپل|ام.?بنسل|قلم|سنون|سن القلم/iu},
+   {id:"chargers",match:/charg|adapter|power.?brick|شاحن|محول كهرب|رأس شاحن/iu},
+   {id:"cables",match:/cable|hub|usb|type.?c|hdmi|وصلة|كابل|وصله|موزع/iu},
+   {id:"mice",match:/mouse|mice|keyboard|كيبورد|ماوس|فأر|لوحة مفاتيح/iu},
+   {id:"protectors",match:/screen.?protect|tempered|glass|paper.?like|protector|اسكرين|سكرين|حماية شاشة|زجاج حماية|حامي الشاشة/iu}
+  ];
+  const grouped=Object.fromEntries(accessoryGroups.map(g=>[g.id,[]]));
+  accessories.forEach(product=>{
+   const searchable=[product.name,product.description,product.brand,product.model].filter(Boolean).join(" ");
+   const group=accessoryGroups.find(g=>g.match.test(searchable))?.id||"cases";
+   grouped[group].push(product);
+  });
+  accessoryGroups.forEach(group=>{
+   const section=document.getElementById("accessory-"+group.id);
+   const grid=section?.querySelector(".accessories-grid");
+   if(!section||!grid)return;
+   const items=grouped[group.id];
+   grid.innerHTML=items.length?items.map(accessoryCard).join(""):'<p class="accessory-group-empty">لا توجد منتجات في هذا القسم حاليًا.</p>';
+   section.hidden=!items.length;
+  });
   document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
   runSiteSearch();
  } catch(error) {
