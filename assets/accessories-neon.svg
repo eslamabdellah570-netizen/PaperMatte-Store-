@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" role="img" aria-labelledby="title desc">
+<title id="title">PaperMatte Store accessories</title><desc id="desc">Neon illustration of a keyboard, mouse, tablet cover, USB hub and earbuds case.</desc>
+<defs>
+ <linearGradient id="bg" x2="1" y2="1"><stop stop-color="#21113c"/><stop offset=".58" stop-color="#10172d"/><stop offset="1" stop-color="#080d18"/></linearGradient>
+ <radialGradient id="glow"><stop stop-color="#7136bd" stop-opacity=".55"/><stop offset="1" stop-color="#7136bd" stop-opacity="0"/></radialGradient>
+ <linearGradient id="key" x2="0" y2="1"><stop stop-color="#68718d"/><stop offset="1" stop-color="#343d59"/></linearGradient>
+ <linearGradient id="blue" x2="1" y2="1"><stop stop-color="#62d5ff"/><stop offset="1" stop-color="#347cff"/></linearGradient>
+ <linearGradient id="purple" x2="1" y2="1"><stop stop-color="#bd6cff"/><stop offset="1" stop-color="#7138dc"/></linearGradient>
+ <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="13"/></filter>
+</defs>
+<rect width="600" height="600" rx="44" fill="url(#bg)"/><ellipse cx="170" cy="220" rx="210" ry="170" fill="url(#glow)"/>
+<circle cx="92" cy="96" r="4" fill="#b77aff"/><circle cx="445" cy="72" r="3" fill="#b77aff"/><circle cx="540" cy="500" r="4" fill="#5acfff"/>
+<!-- keyboard shadow and body -->
+<g transform="translate(88 150) rotate(-8 190 115)">
+ <rect x="8" y="12" width="390" height="225" rx="24" fill="#000" opacity=".48" filter="url(#shadow)"/>
+ <rect x="0" y="0" width="390" height="225" rx="23" fill="#252b40" stroke="#77809a" stroke-width="5"/>
+ <rect x="12" y="12" width="366" height="201" rx="16" fill="#111827" stroke="#48516a" stroke-width="2"/>
+ <g fill="url(#key)" stroke="#9aa4bd" stroke-width="2">
+ <rect x="23" y="27" width="20" height="23" rx="5"/><rect x="49" y="27" width="20" height="23" rx="5"/><rect x="75" y="27" width="20" height="23" rx="5"/><rect x="101" y="27" width="20" height="23" rx="5"/><rect x="127" y="27" width="20" height="23" rx="5"/><rect x="153" y="27" width="20" height="23" rx="5"/><rect x="179" y="27" width="20" height="23" rx="5"/><rect x="205" y="27" width="20" height="23" rx="5"/><rect x="231" y="27" width="20" height="23" rx="5"/><rect x="257" y="27" width="20" height="23" rx="5"/><rect x="283" y="27" width="20" height="23" rx="5"/><rect x="309" y="27" width="20" height="23" rx="5"/><rect x="335" y="27" width="20" height="23" rx="5"/><rect x="23" y="61" width="20" height="23" rx="5"/><rect x="49" y="61" width="20" height="23" rx="5"/><rect x="75" y="61" width="20" height="23" rx="5"/><rect x="101" y="61" width="20" height="23" rx="5"/><rect x="127" y="61" width="20" height="23" rx="5"/><rect x="153" y="61" width="20" height="23" rx="5"/><rect x="179" y="61" width="20" height="23" rx="5"/><rect x="205" y="61" width="20" height="23" rx="5"/><rect x="231" y="61" width="20" height="23" rx="5"/><rect x="257" y="61" width="20" height="23" rx="5"/><rect x="283" y="61" width="20" height="23" rx="5"/><rect x="309" y="61" width="20" height="23" rx="5"/><rect x="335" y="61" width="20" height="23" rx="5"/><rect x="23" y="95" width="20" height="23" rx="5"/><rect x="49" y="95" width="20" height="23" rx="5"/><rect x="75" y="95" width="20" height="23" rx="5"/><rect x="101" y="95" width="20" height="23" rx="5"/><rect x="127" y="95" width="20" height="23" rx="5"/><rect x="153" y="95" width="20" height="23" rx="5"/><rect x="179" y="95" width="20" height="23" rx="5"/><rect x="205" y="95" width="20" height="23" rx="5"/><rect x="231" y="95" width="20" height="23" rx="5"/><rect x="257" y="95" width="20" height="23" rx="5"/><rect x="283" y="95" width="20" height="23" rx="5"/><rect x="309" y="95" width="20" height="23" rx="5"/><rect x="335" y="95" width="20" height="23" rx="5"/><rect x="23" y="129" width="20" height="23" rx="5"/><rect x="49" y="129" width="20" height="23" rx="5"/><rect x="75" y="129" width="20" height="23" rx="5"/><rect x="101" y="129" width="20" height="23" rx="5"/><rect x="127" y="129" width="20" height="23" rx="5"/><rect x="153" y="129" width="20" height="23" rx="5"/><rect x="179" y="129" width="20" height="23" rx="5"/><rect x="205" y="129" width="20" height="23" rx="5"/><rect x="231" y="129" width="20" height="23" rx="5"/><rect x="257" y="129" width="20" height="23" rx="5"/><rect x="283" y="129" width="20" height="23" rx="5"/><rect x="309" y="129" width="20" height="23" rx="5"/><rect x="335" y="129" width="20" height="23" rx="5"/><rect x="23" y="163" width="20" height="23" rx="5"/><rect x="49" y="163" width="20" height="23" rx="5"/><rect x="75" y="163" width="20" height="23" rx="5"/><rect x="101" y="163" width="20" height="23" rx="5"/><rect x="127" y="163" width="20" height="23" rx="5"/><rect x="153" y="163" width="20" height="23" rx="5"/><rect x="179" y="163" width="20" height="23" rx="5"/><rect x="205" y="163" width="20" height="23" rx="5"/><rect x="231" y="163" width="20" height="23" rx="5"/><rect x="257" y="163" width="20" height="23" rx="5"/><rect x="283" y="163" width="20" height="23" rx="5"/><rect x="309" y="163" width="20" height="23" rx="5"/><rect x="335" y="163" width="20" height="23" rx="5"/>
+ </g><rect x="150" y="199" width="86" height="7" rx="4" fill="#8e9ab7"/>
+</g>
+<!-- mouse -->
+<g transform="translate(430 100) rotate(15)">
+ <path d="M72 0C116 0 145 35 145 88v98c0 50-30 83-74 83S0 236 0 186V88C0 35 29 0 72 0Z" fill="#202a43" stroke="url(#blue)" stroke-width="5"/>
+ <path d="M72 13v42" stroke="#8794b2" stroke-width="4" stroke-linecap="round"/><rect x="62" y="48" width="20" height="40" rx="10" fill="url(#purple)"/>
+ <circle cx="118" cy="163" r="5" fill="#5bcfff"/>
+</g>
+<!-- tablet cover / tri-fold stand -->
+<g transform="translate(28 410) rotate(-8)">
+ <path d="M8 22 126 0 210 158 78 184Z" fill="#1b2941" stroke="#8b95ad" stroke-width="4" stroke-linejoin="round"/>
+ <path d="M8 22 57 12 137 168 78 184Z" fill="#273751" stroke="#56637f" stroke-width="3"/>
+ <path d="M126 0 210 158 153 170 76 10Z" fill="#34415d" stroke="#68748e" stroke-width="3"/>
+ <path d="M8 22 78 184 20 170 -4 93Z" fill="#121a2c" stroke="#4e9bff" stroke-width="4"/>
+ <path d="M18 173 78 184 210 158" fill="none" stroke="#4c8fff" stroke-width="4"/>
+</g>
+<!-- earbuds case -->
+<g transform="translate(424 390) rotate(8)">
+ <path d="M8 44Q8 15 37 15H135Q164 15 164 44V120Q164 151 135 151H37Q8 151 8 120Z" fill="#d6d9e7" stroke="#8992ad" stroke-width="4"/>
+ <path d="M8 56Q85 83 164 56" fill="none" stroke="#9aa2b8" stroke-width="4"/>
+ <rect x="62" y="-14" width="28" height="72" rx="13" fill="#e8eaf3" stroke="#9ba4bd" stroke-width="4"/>
+ <circle cx="132" cy="126" r="5" fill="#a65aff"/>
+</g>
+<!-- USB hub -->
+<g transform="translate(245 460) rotate(5)">
+ <rect x="0" y="0" width="165" height="62" rx="16" fill="#3b455f" stroke="#929bb4" stroke-width="4"/>
+ <rect x="18" y="17" width="29" height="27" rx="5" fill="#101827"/><rect x="61" y="17" width="29" height="27" rx="5" fill="#101827"/><rect x="104" y="17" width="29" height="27" rx="5" fill="#101827"/>
+ <path d="M165 31q34 0 44 27t42 27" fill="none" stroke="#aab3cb" stroke-width="6" stroke-linecap="round"/>
+</g>
+</svg>
