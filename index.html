@@ -386,28 +386,30 @@ html{scroll-behavior:smooth}
 #papermatte-whatsapp-float{
  position:fixed!important;left:16px!important;bottom:16px!important;z-index:99999!important;
  display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:center!important;
- gap:19px!important;width:auto!important;min-width:290px!important;height:76px!important;min-height:76px!important;
- padding:0 23px 0 19px!important;margin:0!important;box-sizing:border-box!important;
+ gap:14px!important;width:320px!important;max-width:calc(100vw - 38px)!important;height:76px!important;min-height:76px!important;
+ padding:0 17px!important;margin:0!important;box-sizing:border-box!important;
  border:2px solid #b34dff!important;border-radius:999px!important;
- background:linear-gradient(110deg,#05060b 0%,#090a12 100%)!important;color:#fff!important;
- box-shadow:0 0 0 1px rgba(179,77,255,.10),0 0 16px rgba(179,77,255,.22)!important;
+ background:#07080e!important;color:#fff!important;
+ box-shadow:0 0 0 1px rgba(179,77,255,.10),0 0 13px rgba(179,77,255,.16)!important;
  text-decoration:none!important;font-family:inherit!important;font-size:16px!important;font-weight:800!important;
  line-height:1!important;direction:ltr!important;white-space:nowrap!important;overflow:hidden!important;
  transform:none!important;transition:background .18s ease,border-color .18s ease,box-shadow .18s ease!important;
  -webkit-tap-highlight-color:transparent!important;touch-action:none!important;cursor:grab!important;
  user-select:none!important;-webkit-user-select:none!important;
 }
-#papermatte-whatsapp-float:hover{background:#0b0c14!important;border-color:#bd60ff!important;box-shadow:0 0 0 1px rgba(179,77,255,.12),0 0 18px rgba(179,77,255,.25)!important;transform:none!important}
+#papermatte-whatsapp-float:hover{background:#0b0c14!important;border-color:#bd60ff!important;box-shadow:0 0 0 1px rgba(179,77,255,.12),0 0 16px rgba(179,77,255,.20)!important;transform:none!important}
 #papermatte-whatsapp-float:focus-visible{outline:2px solid #b98aff!important;outline-offset:3px!important}
-#papermatte-whatsapp-float .pm-wa-icon{display:block!important;width:46px!important;height:46px!important;flex:none!important;color:#20e47a!important}
-#papermatte-whatsapp-float .pm-wa-divider{display:block!important;width:1px!important;height:42px!important;flex:none!important;background:#73717f!important;opacity:.9!important}
-#papermatte-whatsapp-float .pm-wa-label{display:inline-block!important;color:#fff!important;font-size:25px!important;font-weight:900!important;line-height:1!important;direction:rtl!important}
+#papermatte-whatsapp-float .pm-wa-icon{display:block!important;width:42px!important;height:42px!important;flex:none!important;color:#20e47a!important}
+#papermatte-whatsapp-float .pm-wa-divider{display:block!important;width:1px!important;height:38px!important;flex:none!important;background:#73717f!important;opacity:.85!important}
+#papermatte-whatsapp-float .pm-wa-label{display:inline-block!important;color:#fff!important;font-size:23px!important;font-weight:900!important;line-height:1!important;direction:rtl!important}
+#papermatte-whatsapp-float .pm-wa-heart{display:inline-block!important;font-size:25px!important;line-height:1!important;flex:none!important}
 #papermatte-whatsapp-float.is-dragging{cursor:grabbing!important;transition:none!important;opacity:.96}
 @media(max-width:650px){
- #papermatte-whatsapp-float{left:13px!important;bottom:13px!important;min-width:min(290px,calc(100vw - 26px))!important;height:74px!important;min-height:74px!important;padding:0 20px 0 17px!important;gap:17px!important}
- #papermatte-whatsapp-float .pm-wa-icon{width:44px!important;height:44px!important}
- #papermatte-whatsapp-float .pm-wa-divider{height:40px!important}
- #papermatte-whatsapp-float .pm-wa-label{font-size:24px!important}
+ #papermatte-whatsapp-float{left:13px!important;bottom:13px!important;width:310px!important;max-width:calc(100vw - 38px)!important;height:74px!important;min-height:74px!important;padding:0 15px!important;gap:13px!important}
+ #papermatte-whatsapp-float .pm-wa-icon{width:41px!important;height:41px!important}
+ #papermatte-whatsapp-float .pm-wa-divider{height:37px!important}
+ #papermatte-whatsapp-float .pm-wa-label{font-size:22px!important}
+ #papermatte-whatsapp-float .pm-wa-heart{font-size:24px!important}
 }
 </style></head>
 <body>
@@ -714,7 +716,7 @@ loadDashboardProducts();
   <path d="M10.3 7.7c-.6-.2-1.2.1-1.6.7L8 9.6c-.4.7-.4 1.6 0 2.3 1.3 2.3 3.1 4.1 5.4 5.4.7.4 1.6.4 2.3 0l1.2-.7c.6-.4.9-1 .7-1.6l-.5-1.6c-.2-.6-.8-.9-1.4-.8l-1.3.3a9.3 9.3 0 0 1-2.1-2.1l.3-1.3c.1-.6-.2-1.2-.8-1.4l-1.5-.4Z" fill="currentColor" stroke="currentColor" stroke-width=".45" stroke-linecap="round" stroke-linejoin="round"/>
  </svg>
  <span class="pm-wa-divider" aria-hidden="true"></span>
- <span class="pm-wa-label" dir="rtl">ابعتلنا 🤍</span>
+ <span class="pm-wa-label">ابعتلنا</span><span class="pm-wa-heart" aria-hidden="true">🤍</span>
 </a>
 <script id="papermatte-whatsapp-drag">
 (()=> {
