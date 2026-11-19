@@ -384,32 +384,31 @@ html{scroll-behavior:smooth}
 
 <style id="papermatte-whatsapp-final">
 #papermatte-whatsapp-float{
- position:fixed!important;left:16px!important;bottom:16px!important;z-index:99999!important;
+ position:fixed!important;left:13px!important;right:auto!important;top:auto!important;bottom:13px!important;z-index:99999!important;
  display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:center!important;
- gap:14px!important;width:320px!important;max-width:calc(100vw - 38px)!important;height:76px!important;min-height:76px!important;
- padding:0 17px!important;margin:0!important;box-sizing:border-box!important;
+ gap:10px!important;width:190px!important;min-width:190px!important;max-width:calc(100vw - 26px)!important;height:58px!important;min-height:58px!important;
+ padding:0 12px!important;margin:0!important;box-sizing:border-box!important;
  border:2px solid #b34dff!important;border-radius:999px!important;
  background:#07080e!important;color:#fff!important;
- box-shadow:0 0 0 1px rgba(179,77,255,.10),0 0 13px rgba(179,77,255,.16)!important;
+ box-shadow:0 0 0 1px rgba(179,77,255,.08),0 0 9px rgba(179,77,255,.14)!important;
  text-decoration:none!important;font-family:inherit!important;font-size:16px!important;font-weight:800!important;
  line-height:1!important;direction:ltr!important;white-space:nowrap!important;overflow:hidden!important;
  transform:none!important;transition:background .18s ease,border-color .18s ease,box-shadow .18s ease!important;
  -webkit-tap-highlight-color:transparent!important;touch-action:none!important;cursor:grab!important;
  user-select:none!important;-webkit-user-select:none!important;
 }
-#papermatte-whatsapp-float:hover{background:#0b0c14!important;border-color:#bd60ff!important;box-shadow:0 0 0 1px rgba(179,77,255,.12),0 0 16px rgba(179,77,255,.20)!important;transform:none!important}
+#papermatte-whatsapp-float:hover{background:#0b0c14!important;border-color:#bd60ff!important;box-shadow:0 0 0 1px rgba(179,77,255,.10),0 0 11px rgba(179,77,255,.17)!important;transform:none!important}
 #papermatte-whatsapp-float:focus-visible{outline:2px solid #b98aff!important;outline-offset:3px!important}
-#papermatte-whatsapp-float .pm-wa-icon{display:block!important;width:42px!important;height:42px!important;flex:none!important;color:#20e47a!important}
-#papermatte-whatsapp-float .pm-wa-divider{display:block!important;width:1px!important;height:38px!important;flex:none!important;background:#73717f!important;opacity:.85!important}
-#papermatte-whatsapp-float .pm-wa-label{display:inline-block!important;color:#fff!important;font-size:23px!important;font-weight:900!important;line-height:1!important;direction:rtl!important}
-#papermatte-whatsapp-float .pm-wa-heart{display:inline-block!important;font-size:25px!important;line-height:1!important;flex:none!important}
+#papermatte-whatsapp-float .pm-wa-icon{display:block!important;width:29px!important;height:29px!important;flex:none!important;color:#20e47a!important}
+#papermatte-whatsapp-float .pm-wa-divider{display:block!important;width:1px!important;height:32px!important;flex:none!important;background:#73717f!important;opacity:.85!important}
+#papermatte-whatsapp-float .pm-wa-label{display:inline-block!important;color:#fff!important;font-size:19px!important;font-weight:900!important;line-height:1!important;direction:rtl!important}
+#papermatte-whatsapp-float .pm-wa-heart{display:inline-block!important;font-size:21px!important;line-height:1!important;flex:none!important}
 #papermatte-whatsapp-float.is-dragging{cursor:grabbing!important;transition:none!important;opacity:.96}
-@media(max-width:650px){
- #papermatte-whatsapp-float{left:13px!important;bottom:13px!important;width:310px!important;max-width:calc(100vw - 38px)!important;height:74px!important;min-height:74px!important;padding:0 15px!important;gap:13px!important}
- #papermatte-whatsapp-float .pm-wa-icon{width:41px!important;height:41px!important}
- #papermatte-whatsapp-float .pm-wa-divider{height:37px!important}
- #papermatte-whatsapp-float .pm-wa-label{font-size:22px!important}
- #papermatte-whatsapp-float .pm-wa-heart{font-size:24px!important}
+@media(max-width:380px){
+ #papermatte-whatsapp-float{width:184px!important;min-width:184px!important;height:56px!important;min-height:56px!important;gap:9px!important;padding:0 10px!important}
+ #papermatte-whatsapp-float .pm-wa-icon{width:27px!important;height:27px!important}
+ #papermatte-whatsapp-float .pm-wa-label{font-size:18px!important}
+ #papermatte-whatsapp-float .pm-wa-heart{font-size:20px!important}
 }
 </style></head>
 <body>
@@ -724,7 +723,7 @@ loadDashboardProducts();
  if(!el || el.dataset.dragReady) return;
  el.dataset.dragReady='1';
  let dragging=false,moved=false,startX=0,startY=0,originX=0,originY=0;
- const key='papermatte-whatsapp-position-v1';
+ const key='papermatte-whatsapp-position-v2';
  const clamp=(v,min,max)=>Math.max(min,Math.min(max,v));
  try{
   const saved=JSON.parse(localStorage.getItem(key)||'null');
