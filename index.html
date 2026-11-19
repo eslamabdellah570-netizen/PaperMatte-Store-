@@ -222,6 +222,55 @@ img,video,iframe{max-width:100%}
 .accessories-showcase{display:block;width:100%;max-width:900px;margin:0 auto;border:1px solid #7545bd;border-radius:24px;overflow:hidden;background:#11121f;box-shadow:0 18px 55px #6e2ad533;line-height:0}
 .accessories-showcase img{display:block;width:100%;height:auto;object-fit:contain}
 
+
+/* Accessories section — reference-matched layout */
+.accessories-page{padding-top:56px}
+.accessories-title{text-align:center;margin:0 auto 28px}
+.accessories-kicker{display:flex;align-items:center;justify-content:center;gap:18px;color:#b66aff;font-weight:900;letter-spacing:3px;font-size:14px;margin-bottom:18px}
+.accessories-kicker span{width:44px;height:2px;background:linear-gradient(90deg,#8b4cff,#48a9ff);border-radius:3px}
+.accessories-title h2{font-size:clamp(30px,4vw,46px);line-height:1.2;margin:0 0 12px}
+.accessories-title p{font-size:16px;color:#aeb3c8;margin:0}
+.accessories-hero-art{display:block;width:100%;aspect-ratio:1.2/1;max-height:590px;overflow:hidden;border:1px solid #7545bd;border-radius:30px;background:#0b1020;box-shadow:0 20px 60px #6924c52b;line-height:0}
+.accessories-hero-art img{display:block;width:100%;height:100%;object-fit:cover}
+.accessory-categories{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:0;margin:28px 0 30px;padding:10px;border:1px solid #24213f;border-radius:25px;background:linear-gradient(120deg,#121326,#0c1020);box-shadow:0 10px 30px #0003}
+.accessory-category{min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:12px 5px;border-radius:19px;color:#d9dcf0;font-size:12px;text-align:center;white-space:nowrap;transition:.2s}
+.accessory-category+.accessory-category{border-right:1px solid #3b315c;border-radius:0}
+.accessory-category:hover,.accessory-category.active{background:linear-gradient(145deg,#321078,#171b42);color:#fff;box-shadow:0 8px 22px #6a27d344;border-radius:18px}
+.accessory-category-icon{display:grid;place-items:center;width:48px;height:48px;color:#c1b4ff}
+.accessory-category-icon svg{width:34px;height:34px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.accessory-feature{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:20px;min-height:340px;padding:25px 34px;border:1px solid #252345;border-radius:27px;background:radial-gradient(ellipse at 22% 50%,#4d1c9b55,transparent 45%),linear-gradient(120deg,#111322,#090e1c);overflow:hidden}
+.accessory-feature-art{height:290px;display:grid;place-items:center;min-width:0}
+.accessory-feature-art img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 14px 24px #0008)}
+.accessory-feature-copy{direction:rtl;text-align:right;padding:10px 12px}
+.accessory-feature-label{display:inline-block;border:1px solid #5a2b9a;border-radius:30px;padding:8px 16px;color:#b879ff;font-size:15px;font-weight:800;margin-bottom:12px;background:#170e2b88}
+.accessory-feature-copy h3{font-size:clamp(27px,3vw,40px);font-weight:900;margin:0 0 12px;color:#fff}
+.accessory-feature-copy p{font-size:16px;line-height:1.8;color:#c2c5d5;margin:0 0 22px;max-width:440px}
+.accessory-feature-copy>a{display:inline-flex;align-items:center;gap:14px;padding:13px 26px;border-radius:40px;background:linear-gradient(110deg,#7025ed,#982bff);color:white;font-size:16px;font-weight:900;box-shadow:0 9px 28px #7124d955}
+.accessory-feature-copy>a span{font-size:20px}
+.accessories-bottom-art{display:block;height:190px;margin-top:24px;overflow:hidden;border:1px solid #242345;border-radius:25px;background:#0b1020;line-height:0}
+.accessories-bottom-art img{width:100%;height:100%;display:block;object-fit:cover;object-position:center 52%}
+@media(max-width:850px){.accessory-categories{grid-template-columns:repeat(3,minmax(0,1fr));row-gap:5px}.accessory-category:nth-child(4){border-right:0}.accessory-feature{gap:8px;padding:20px}.accessory-feature-art{height:245px}}
+@media(max-width:650px){
+ .accessories-page{padding-top:42px}
+ .accessories-title{margin-bottom:22px}
+ .accessories-kicker{font-size:12px;letter-spacing:2.5px;margin-bottom:13px}
+ .accessories-title h2{font-size:31px}
+ .accessories-title p{font-size:13px}
+ .accessories-hero-art{aspect-ratio:1/1;max-height:none;border-radius:24px}
+ .accessory-categories{grid-template-columns:repeat(3,minmax(0,1fr));margin:18px 0 20px;padding:7px;border-radius:20px}
+ .accessory-category{font-size:10px;gap:4px;padding:10px 2px;white-space:normal;line-height:1.3}
+ .accessory-category-icon{width:38px;height:38px}
+ .accessory-category-icon svg{width:29px;height:29px}
+ .accessory-feature{grid-template-columns:1fr;gap:0;padding:12px 16px 22px;border-radius:23px}
+ .accessory-feature-art{height:235px;order:0}
+ .accessory-feature-copy{order:1;padding:0 6px 5px}
+ .accessory-feature-label{font-size:12px;padding:6px 12px;margin-bottom:9px}
+ .accessory-feature-copy h3{font-size:29px;margin-bottom:7px}
+ .accessory-feature-copy p{font-size:13px;line-height:1.7;margin-bottom:15px}
+ .accessory-feature-copy>a{font-size:13px;padding:11px 21px}
+ .accessories-bottom-art{height:135px;margin-top:17px;border-radius:20px}
+}
+
 /* Emergency visibility fallback: never hide storefront content if scripts fail */
 .reveal,.reveal.visible{opacity:1!important;transform:none!important;visibility:visible!important}
 #productsGrid:empty{min-height:0}
@@ -349,12 +398,34 @@ img,video,iframe{max-width:100%}
 </section>
 
 
-<section class="container section" id="accessories">
- <div class="section-head">
-  <div><div class="section-kicker">THE ACCESSORIES</div><h2>إكسسوارات PaperMatte Store</h2><p class="section-sub">كل اختيارات الإكسسوارات في تصميم واحد.</p></div>
+<section class="container section accessories-page" id="accessories">
+ <div class="accessories-title">
+  <div class="accessories-kicker"><span></span> THE ACCESSORIES <span></span></div>
+  <h2>إكسسوارات PaperMatte Store</h2>
+  <p>كل اختيارات الإكسسوارات في تصميم واحد.</p>
  </div>
- <a class="accessories-showcase" href="/assets/accessories-neon.svg" target="_blank" rel="noopener" aria-label="عرض صورة إكسسوارات PaperMatte Store">
-  <img src="/assets/accessories-neon.svg" alt="إكسسوارات PaperMatte Store: Huawei M-Pen lite وجراب Honor MagicPad 4 وقلم HONOR Choice وHuawei M-Pencil 3" loading="lazy" decoding="async">
+ <a class="accessories-hero-art" href="/assets/accessories-neon.svg" target="_blank" rel="noopener" aria-label="عرض تشكيلة إكسسوارات PaperMatte Store">
+  <img src="/assets/accessories-neon.svg" alt="تشكيلة إكسسوارات تشمل جراب تابلت ثلاثي الطيات وكيبورد وماوس وشاحن ووصلة USB" loading="eager" decoding="async">
+ </a>
+ <nav class="accessory-categories" aria-label="أقسام الإكسسوارات">
+  <a class="accessory-category active" href="#accessoriesGrid"><span class="accessory-category-icon"><svg viewBox="0 0 24 24"><rect x="5" y="2.5" width="14" height="19" rx="2.5"/><path d="M9 5h6M10.5 18.5h3"/></svg></span><span>Cases &amp; Covers</span></a>
+  <a class="accessory-category" href="#accessoriesGrid"><span class="accessory-category-icon"><svg viewBox="0 0 24 24"><path d="m14 4 6 6M4 20l4.5-1 11-11a2.8 2.8 0 0 0-4-4l-11 11L4 20Z"/><path d="m13 5 6 6"/></svg></span><span>Pens &amp; Stylus</span></a>
+  <a class="accessory-category" href="#accessoriesGrid"><span class="accessory-category-icon"><svg viewBox="0 0 24 24"><rect x="6" y="7" width="12" height="14" rx="2"/><path d="M9 2v5m6-5v5m-3 5v4"/></svg></span><span>Chargers</span></a>
+  <a class="accessory-category" href="#accessoriesGrid"><span class="accessory-category-icon"><svg viewBox="0 0 24 24"><path d="M8 3v6a4 4 0 0 0 8 0V3M6 3v4m4-4v4m4-4v4m4-4v4M12 13v8"/></svg></span><span>Cables &amp; Hubs</span></a>
+  <a class="accessory-category" href="#accessoriesGrid"><span class="accessory-category-icon"><svg viewBox="0 0 24 24"><path d="M12 2C7 2 5 6 5 11v3a7 7 0 0 0 14 0v-3c0-5-2-9-7-9Z"/><path d="M12 2v7m-7 0h14"/></svg></span><span>Mice &amp; Keyboards</span></a>
+  <a class="accessory-category" href="#accessoriesGrid"><span class="accessory-category-icon"><svg viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M7 5h10M7 18h10"/></svg></span><span>Screen Protectors</span></a>
+ </nav>
+ <article class="accessory-feature">
+  <div class="accessory-feature-art"><img src="/assets/tablet-case-feature.svg" alt="جراب تابلت ثلاثي الطيات بتصميم أنيق" loading="lazy" decoding="async"></div>
+  <div class="accessory-feature-copy">
+   <span class="accessory-feature-label">Cases &amp; Covers</span>
+   <h3>كفرات التابلت</h3>
+   <p>حماية مثالية لتابلتك مع تصميم عملي وأنيق يناسب كل احتياجاتك.</p>
+   <a href="#accessoriesGrid">تصفح الآن <span>➜</span></a>
+  </div>
+ </article>
+ <a class="accessories-bottom-art" href="#accessoriesGrid" aria-label="تصفح جميع الإكسسوارات">
+  <img src="/assets/accessories-neon.svg" alt="تشكيلة متنوعة من إكسسوارات التابلت" loading="lazy" decoding="async">
  </a>
  <div class="accessories-grid" id="accessoriesGrid">
   <div class="accessory-card" id="accessoriesEmpty">
