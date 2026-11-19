@@ -221,6 +221,10 @@ img,video,iframe{max-width:100%}
 
 .accessories-showcase{display:block;width:100%;max-width:900px;margin:0 auto;border:1px solid #7545bd;border-radius:24px;overflow:hidden;background:#11121f;box-shadow:0 18px 55px #6e2ad533;line-height:0}
 .accessories-showcase img{display:block;width:100%;height:auto;object-fit:contain}
+
+/* Emergency visibility fallback: never hide storefront content if scripts fail */
+.reveal,.reveal.visible{opacity:1!important;transform:none!important;visibility:visible!important}
+#productsGrid:empty{min-height:0}
 </style>
 <!-- Cloudflare Web Analytics -->
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"1cfd82e11cee4da9b9ff2dfa4ade48ee"}'></script>
