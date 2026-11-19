@@ -386,27 +386,28 @@ html{scroll-behavior:smooth}
 #papermatte-whatsapp-float{
  position:fixed!important;left:16px!important;bottom:16px!important;z-index:99999!important;
  display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:center!important;
- gap:12px!important;width:auto!important;min-width:0!important;height:56px!important;min-height:56px!important;
- padding:0 18px 0 13px!important;margin:0!important;box-sizing:border-box!important;
- border:1px solid #8e63d8!important;border-radius:999px!important;
- background:#10121b!important;color:#fff!important;box-shadow:none!important;
+ gap:12px!important;width:auto!important;min-width:0!important;height:54px!important;min-height:54px!important;
+ padding:0 16px 0 12px!important;margin:0!important;box-sizing:border-box!important;
+ border:2px solid #bd50ed!important;border-radius:999px!important;
+ background:#090b12!important;color:#fff!important;
+ box-shadow:0 0 9px rgba(189,80,237,.22)!important;
  text-decoration:none!important;font-family:inherit!important;font-size:16px!important;font-weight:800!important;
  line-height:1!important;direction:ltr!important;white-space:nowrap!important;overflow:hidden!important;
  transform:none!important;transition:background .18s ease,border-color .18s ease!important;
  -webkit-tap-highlight-color:transparent!important;touch-action:none!important;cursor:grab!important;
  user-select:none!important;-webkit-user-select:none!important;
 }
-#papermatte-whatsapp-float:hover{background:#171927!important;border-color:#a27be6!important;box-shadow:none!important;transform:none!important}
-#papermatte-whatsapp-float:focus-visible{outline:2px solid #b98aff!important;outline-offset:3px!important}
-#papermatte-whatsapp-float .pm-wa-icon{display:block!important;width:32px!important;height:32px!important;flex:none!important;color:#20d889!important}
-#papermatte-whatsapp-float .pm-wa-divider{display:block!important;width:1px!important;height:27px!important;flex:none!important;background:#77718b!important;opacity:.8!important}
+#papermatte-whatsapp-float:hover{background:#10121b!important;border-color:#ca69f4!important;box-shadow:0 0 10px rgba(189,80,237,.25)!important;transform:none!important}
+#papermatte-whatsapp-float:focus-visible{outline:2px solid #d59aff!important;outline-offset:3px!important}
+#papermatte-whatsapp-float .pm-wa-icon{display:block!important;width:34px!important;height:34px!important;flex:none!important;color:#20df83!important}
+#papermatte-whatsapp-float .pm-wa-divider{display:block!important;width:1px!important;height:29px!important;flex:none!important;background:#777786!important;opacity:.85!important}
 #papermatte-whatsapp-float .pm-wa-label{display:inline-block!important;color:#fff!important;font-size:16px!important;font-weight:800!important;line-height:1!important;direction:rtl!important}
-#papermatte-whatsapp-float.is-dragging{cursor:grabbing!important;transition:none!important;opacity:.96!important}
+#papermatte-whatsapp-float.is-dragging{cursor:grabbing!important;transition:none!important;opacity:.96}
 @media(max-width:650px){
  #papermatte-whatsapp-float{left:13px!important;bottom:13px!important;height:53px!important;min-height:53px!important;padding:0 15px 0 11px!important;gap:10px!important}
- #papermatte-whatsapp-float .pm-wa-icon{width:30px!important;height:30px!important}
- #papermatte-whatsapp-float .pm-wa-divider{height:25px!important}
- #papermatte-whatsapp-float .pm-wa-label{font-size:15px!important}
+ #papermatte-whatsapp-float .pm-wa-icon{width:32px!important;height:32px!important}
+ #papermatte-whatsapp-float .pm-wa-divider{height:27px!important}
+ #papermatte-whatsapp-float .pm-wa-label{font-size:16px!important}
 }
 </style></head>
 <body>
@@ -709,8 +710,8 @@ loadDashboardProducts();
 </script>
 <a id="papermatte-whatsapp-float" href="https://wa.me/201024915343?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%B9%D8%A7%D9%8A%D8%B2%20%D8%A3%D8%B3%D8%AA%D9%81%D8%B3%D8%B1%20%D8%B9%D9%86%20%D9%85%D9%86%D8%AA%D8%AC%D8%A7%D8%AA%20PaperMatte%20Store." target="_blank" rel="noopener noreferrer" aria-label="ابعتلنا على واتساب" title="ابعتلنا على واتساب">
  <svg class="pm-wa-icon" viewBox="0 0 32 32" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-  <path d="M16 3.25a12.35 12.35 0 0 0-10.7 18.52L3.7 28.3l6.7-1.75A12.35 12.35 0 1 0 16 3.25Z" fill="none" stroke="currentColor" stroke-width="2.15" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M11.05 8.65c-.34-.76-.7-.78-1.03-.8h-.87c-.3 0-.78.11-1.19.56-.41.45-1.56 1.52-1.56 3.7s1.6 4.29 1.82 4.58c.22.3 3.12 5 7.7 6.8 3.8 1.5 4.58 1.2 5.4 1.12.82-.08 2.65-1.08 3.03-2.13.37-1.05.37-1.95.26-2.14-.11-.19-.41-.3-.86-.53l-2.87-1.42c-.38-.19-.67-.29-.95.16-.28.45-1.1 1.42-1.35 1.71-.25.29-.5.33-.93.11-.43-.22-1.81-.67-3.45-2.13-1.28-1.14-2.14-2.55-2.39-2.99-.25-.44-.03-.68.19-.9.19-.19.43-.5.65-.75.22-.25.29-.43.43-.72.14-.29.07-.55-.04-.77l-1.29-2.95Z" fill="currentColor" transform="translate(0 -1.4) scale(.96)"/>
+ <path d="M16 3.25a12.35 12.35 0 0 0-10.7 18.52L3.7 28.3l6.7-1.75A12.35 12.35 0 1 0 16 3.25Z" fill="none" stroke="currentColor" stroke-width="2.35" stroke-linecap="round" stroke-linejoin="round"/>
+ <path d="M10.15 8.35c-.55-.25-1.15-.12-1.55.35-.58.66-1.05 1.48-1.02 2.48.05 1.74 1.37 4.03 3.22 5.93 1.84 1.9 4.13 3.27 5.91 3.42 1.02.09 1.82-.38 2.48-.96.48-.42.61-1.04.33-1.58l-1.16-2.15c-.28-.51-.89-.7-1.4-.43l-1.63.88c-1.31-.67-2.45-1.82-3.13-3.13l.87-1.64c.27-.51.08-1.12-.43-1.4l-2.49-1.77Z" fill="currentColor" transform="translate(1 0)"/>
 </svg>
  <span class="pm-wa-divider" aria-hidden="true"></span>
  <span class="pm-wa-label" dir="rtl">ابعتلنا 🤍</span>
