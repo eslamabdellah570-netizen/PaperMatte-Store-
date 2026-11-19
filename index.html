@@ -581,8 +581,7 @@ async function loadDashboardProducts() {
   if(products.length) document.getElementById("productsGrid").innerHTML=products.map(productCard).join("");
   if(accessories.length) {
    const grid=document.querySelector("#accessories .accessories-grid");
-   const empty=document.getElementById("accessoriesEmpty");
-   grid.innerHTML=(empty?empty.outerHTML:'')+accessories.map(accessoryCard).join("");
+   if(grid) grid.innerHTML=accessories.map(accessoryCard).join("");
   }
   document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
   runSiteSearch();
