@@ -391,8 +391,16 @@ html{scroll-behavior:smooth}
  background:#20c875!important;color:#fff!important;
  border:0!important;box-shadow:none!important;
  text-decoration:none!important;font-size:0!important;line-height:1!important;
- transform:none!important;overflow:hidden!important;-webkit-tap-highlight-color:transparent!important
+ transform:none!important;overflow:hidden!important;-webkit-tap-highlight-color:transparent!important;
+ animation:papermatte-whatsapp-float 2.8s ease-in-out infinite!important;
+ will-change:transform
 }
+@keyframes papermatte-whatsapp-float{
+ 0%,100%{transform:translateY(0)}
+ 50%{transform:translateY(-7px)}
+}
+#papermatte-whatsapp-float:hover{animation-play-state:paused!important}
+@media(prefers-reduced-motion:reduce){#papermatte-whatsapp-float{animation:none!important;will-change:auto}}
 #papermatte-whatsapp-float svg{display:block!important;width:44px!important;height:44px!important;flex:none!important;fill:#fff!important;stroke:none!important}
 #papermatte-whatsapp-float:hover{background:#20c875!important;transform:none!important;box-shadow:none!important}
 #papermatte-whatsapp-float:focus-visible{outline:3px solid #b98aff!important;outline-offset:3px!important}
