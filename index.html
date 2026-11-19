@@ -332,10 +332,24 @@ html{scroll-behavior:smooth}
 @media(max-width:650px){.accessories-hero-art{aspect-ratio:1/1}.accessories-hero-art img{padding:5px}}
  .accessories-hero-art img{object-fit:contain!important;padding:10px}
 
-/* Compact floating WhatsApp icon — clean circular style */
-.whatsapp-float,.whatsapp-float:hover{position:fixed;width:52px;height:52px;left:18px;bottom:18px;padding:0;display:flex;align-items:center;justify-content:center;gap:0;border-radius:50%;background:#20c875;color:#fff;border:0;box-shadow:none;font-size:0;transform:none;transition:none}
+/* Premium floating WhatsApp contact button */
+.whatsapp-float,.whatsapp-float:hover{
+ position:fixed;left:22px;bottom:22px;z-index:100;
+ width:54px;height:54px;padding:0;margin:0;
+ display:flex;align-items:center;justify-content:center;
+ border-radius:50%;
+ background:linear-gradient(145deg,#25d366 0%,#16b85a 100%);
+ color:#fff;border:1px solid rgba(255,255,255,.28);
+ box-shadow:0 5px 18px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.22);
+ font-size:0;line-height:1;text-decoration:none;
+ transform:none;transition:transform .2s ease,filter .2s ease,box-shadow .2s ease;
+ -webkit-tap-highlight-color:transparent
+}
+.whatsapp-float:hover{filter:brightness(1.06);transform:translateY(-2px);box-shadow:0 8px 22px rgba(0,0,0,.3),inset 0 1px 0 rgba(255,255,255,.25)}
+.whatsapp-float:focus-visible{outline:3px solid #b98aff;outline-offset:4px}
 .whatsapp-float::before{content:none!important;display:none!important}
-.whatsapp-float svg{display:block;width:27px;height:27px;flex:none}
+.whatsapp-float svg{display:block;width:29px;height:29px;flex:none;stroke:currentColor;stroke-width:1.8}
+@media(max-width:650px){.whatsapp-float,.whatsapp-float:hover{left:18px;bottom:18px;width:52px;height:52px}.whatsapp-float svg{width:28px;height:28px}}
 </style>
 <!-- Cloudflare Web Analytics -->
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"1cfd82e11cee4da9b9ff2dfa4ade48ee"}'></script>
@@ -544,7 +558,7 @@ html{scroll-behavior:smooth}
   <div class="copyright"><span>© 2026 PaperMatte Store. All rights reserved.</span><span>Made for people who love smart technology.</span></div>
  </div>
 </footer>
-<a class="whatsapp-float" href="https://wa.me/201024915343?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%B9%D8%A7%D9%8A%D8%B2%20%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%B1%20%D8%B9%D9%86%20%D9%85%D9%86%D8%AA%D8%AC%D8%A7%D8%AA%20PaperMatte%20Store. " target="_blank" rel="noopener" aria-label="تواصل عبر واتساب" title="تواصل عبر واتساب"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.2 11.4a8.2 8.2 0 0 1-8.2 8.2 8.1 8.1 0 0 1-4 0L3 21l1.4-4.5a8.2 8.2 0 1 1 15.8-5.1Z"/></svg></a>
+<a class="whatsapp-float" href="https://wa.me/201024915343?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%B9%D8%A7%D9%8A%D8%B2%20%D8%A7%D8%B3%D8%AA%D9%81%D8%B3%D8%B1%20%D8%B9%D9%86%20%D9%85%D9%86%D8%AA%D8%AC%D8%A7%D8%AA%20PaperMatte%20Store. " target="_blank" rel="noopener" aria-label="تواصل عبر واتساب" title="تواصل عبر واتساب"><svg viewBox="0 0 32 32" width="30" height="30" fill="none" aria-hidden="true"><path d="M16 3.5a12.1 12.1 0 0 0-10.4 18.3L4 28l6.4-1.6A12.1 12.1 0 1 0 16 3.5Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M12.1 10.5c-.3-.7-.7-.7-1-.7h-.8c-.3 0-.8.1-1.1.6-.4.4-1.4 1.4-1.4 3.3s1.4 3.8 1.6 4.1c.2.3 2.8 4.5 6.8 6.1 3.3 1.3 4 .9 4.7.8.7-.1 2.3-1 2.6-1.9.3-.9.3-1.7.2-1.9-.1-.2-.4-.3-.8-.5l-2.6-1.2c-.4-.2-.7-.2-1 .2-.3.4-1 1.2-1.2 1.5-.2.3-.5.3-.9.1-.4-.2-1.7-.6-3.2-2-1.2-1.1-2-2.4-2.2-2.8-.2-.4 0-.6.2-.8l.7-.9c.2-.3.3-.5.4-.8.1-.3 0-.6-.1-.8l-1.1-2.7Z" fill="currentColor"/></svg></a>
 <script>
 const menuToggle=document.getElementById('menuToggle'),nav=document.getElementById('mainNav');
 menuToggle.addEventListener('click',()=>nav.classList.toggle('open'));
