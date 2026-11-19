@@ -287,6 +287,36 @@ html{scroll-behavior:smooth}
 /* Emergency visibility fallback: never hide storefront content if scripts fail */
 .reveal,.reveal.visible{opacity:1!important;transform:none!important;visibility:visible!important}
 #productsGrid:empty{min-height:0}
+
+/* Accessory feature polish: prevent artwork from crowding the copy on touch screens */
+.accessory-feature{grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);min-height:0;gap:26px;padding:26px 30px}
+.accessory-feature-art{height:280px;min-height:0;overflow:hidden;border-radius:20px;background:radial-gradient(ellipse at 50% 50%,#24204a 0%,#101426 72%)}
+.accessory-feature-art img{display:block;width:100%;height:100%;max-width:100%;object-fit:contain;object-position:center;padding:8px}
+.accessory-feature-copy{position:relative;z-index:1;min-width:0}
+.accessory-feature-copy h3{line-height:1.25}
+.accessories-bottom-art{height:clamp(145px,22vw,210px);margin-top:22px}
+.accessories-bottom-art img{object-position:center 54%}
+.accessory-group-section{scroll-margin-top:105px}
+.accessory-group-heading{margin-top:30px;margin-bottom:22px}
+@media(max-width:850px){
+ .accessory-feature{grid-template-columns:minmax(0,1fr);gap:10px;padding:18px 20px 24px}
+ .accessory-feature-art{height:clamp(190px,34vw,250px);width:100%}
+ .accessory-feature-copy{padding:4px 8px 0}
+}
+@media(max-width:650px){
+ .accessory-feature{grid-template-columns:minmax(0,1fr);gap:8px;padding:12px 14px 20px}
+ .accessory-feature-art{height:clamp(190px,58vw,230px);border-radius:17px}
+ .accessory-feature-art img{padding:4px}
+ .accessory-feature-copy{padding:4px 5px 0}
+ .accessory-feature-copy h3{font-size:27px;margin:0 0 8px}
+ .accessory-feature-copy p{font-size:14px;line-height:1.85;margin-bottom:16px}
+ .accessory-feature-copy>a{font-size:14px;padding:12px 22px}
+ .accessories-bottom-art{height:128px;margin-top:15px;border-radius:17px}
+ .accessory-group-heading{margin-top:28px;margin-bottom:20px;gap:12px}
+ .accessory-group-heading h3{font-size:clamp(19px,5.5vw,24px)}
+ .whatsapp-float{width:52px;height:52px;padding:0;justify-content:center;border-radius:50%;font-size:0;gap:0;left:14px;bottom:14px}
+ .whatsapp-float::before{content:"◉";font-size:25px;line-height:1}
+}
 </style>
 <!-- Cloudflare Web Analytics -->
 <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"1cfd82e11cee4da9b9ff2dfa4ade48ee"}'></script>
