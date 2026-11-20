@@ -567,6 +567,7 @@ html{scroll-behavior:smooth}
   <a class="accessory-category" href="#accessory-cables"><span class="accessory-category-icon"><svg viewBox="0 0 24 24"><path d="M8 3v6a4 4 0 0 0 8 0V3M6 3v4m4-4v4m4-4v4m4-4v4M12 13v8"/></svg></span><span>Cables &amp; Hubs</span></a>
   <a class="accessory-category" href="#accessory-mice"><span class="accessory-category-icon"><svg viewBox="0 0 24 24"><path d="M12 2C7 2 5 6 5 11v3a7 7 0 0 0 14 0v-3c0-5-2-9-7-9Z"/><path d="M12 2v7m-7 0h14"/></svg></span><span>Mice &amp; Keyboards</span></a>
   <a class="accessory-category" href="#accessory-protectors"><span class="accessory-category-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5 20 6v5.2c0 5.1-3.4 8.7-8 10.3-4.6-1.6-8-5.2-8-10.3V6l8-3.5Z"/><path d="m8.5 12 2.2 2.2 4.8-4.8"/></svg></span><span>Screen Protectors</span></a>
+  <a class="accessory-category" href="#accessory-audio"><span class="accessory-category-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 13v-2a8 8 0 0 1 16 0v2"/><rect x="3" y="12" width="5" height="8" rx="2"/><rect x="16" y="12" width="5" height="8" rx="2"/></svg></span><span>Audio &amp; Headphones</span></a>
  </div>
  <div class="accessory-groups">
   <section class="accessory-group" id="accessory-cases" hidden><h3 class="accessory-group-title">Cases &amp; Covers</h3><div class="accessories-grid"></div></section>
@@ -575,6 +576,7 @@ html{scroll-behavior:smooth}
   <section class="accessory-group" id="accessory-cables" hidden><h3 class="accessory-group-title">Cables &amp; Hubs</h3><div class="accessories-grid"></div></section>
   <section class="accessory-group" id="accessory-mice" hidden><h3 class="accessory-group-title">Mice &amp; Keyboards</h3><div class="accessories-grid"></div></section>
   <section class="accessory-group" id="accessory-protectors" hidden><h3 class="accessory-group-title">Screen Protectors</h3><div class="accessories-grid"></div></section>
+  <section class="accessory-group" id="accessory-audio" hidden><h3 class="accessory-group-title">Audio &amp; Headphones</h3><div class="accessories-grid"></div></section>
  </div>
 <script>
 const menuToggle=document.getElementById('menuToggle'),nav=document.getElementById('mainNav');
@@ -745,7 +747,8 @@ async function loadDashboardProducts() {
    {id:"chargers",match:/charg|adapter|power.?brick|شاحن|محول كهرب|رأس شاحن/iu},
    {id:"cables",match:/cable|hub|usb|type.?c|hdmi|وصلة|كابل|وصله|موزع/iu},
    {id:"mice",match:/mouse|mice|keyboard|كيبورد|ماوس|فأر|لوحة مفاتيح/iu},
-   {id:"protectors",match:/screen.?protect|tempered|glass|paper.?like|protector|اسكرين|سكرين|حماية شاشة|زجاج حماية|حامي الشاشة/iu}
+   {id:"protectors",match:/screen.?protect|tempered|glass|paper.?like|protector|اسكرين|سكرين|حماية شاشة|زجاج حماية|حامي الشاشة/iu},
+   {id:"audio",match:/earbud|headphone|freeclip|airpod|speaker|سماعة|سماعات|ايربود/iu}
   ];
   const grouped=Object.fromEntries(accessoryGroups.map(g=>[g.id,[]]));
   accessories.forEach(product=>{
