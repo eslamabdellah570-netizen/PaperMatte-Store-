@@ -428,7 +428,27 @@ html{scroll-behavior:smooth}
  #papermatte-whatsapp-float{width:154px!important;min-width:154px!important;height:46px!important;min-height:46px!important}
 }
 </style>
-</head>
+<style id="papermatte-whatsapp-scroll-behavior">
+#papermatte-whatsapp-float{
+ position:fixed!important;
+ left:13px!important;right:auto!important;top:auto!important;bottom:13px!important;
+ z-index:99999!important;
+ margin:0!important;
+ opacity:1!important;visibility:visible!important;pointer-events:auto!important;
+ transform:translateY(0)!important;
+ transition:opacity .18s ease,transform .18s ease!important;
+}
+#papermatte-whatsapp-float.pm-scroll-hidden{
+ opacity:0!important;visibility:hidden!important;pointer-events:none!important;
+ transform:translateY(10px)!important;
+}
+@media(max-width:380px){
+ #papermatte-whatsapp-float{left:13px!important;bottom:13px!important}
+}
+@media(prefers-reduced-motion:reduce){
+ #papermatte-whatsapp-float{transition:none!important}
+}
+</style></head>
 <body>
 <div id="pmProductDetail" aria-live="polite"></div>
 <header>
@@ -752,4 +772,27 @@ loadDashboardProducts();
 </script>
 
 <script id="papermatte-whatsapp-drag">/* Button now scrolls naturally with page content; drag positioning disabled. */</script>
+<script id="papermatte-whatsapp-scroll-behavior">
+(()=> {
+ const button=document.getElementById('papermatte-whatsapp-float');
+ if(!button || button.dataset.scrollBehaviorReady) return;
+ button.dataset.scrollBehaviorReady='1';
+ let idleTimer=null;
+ let lastY=window.scrollY || 0;
+ const show=()=>{
+  button.classList.remove('pm-scroll-hidden');
+  lastY=window.scrollY || 0;
+ };
+ const onScroll=()=>{
+  const y=window.scrollY || 0;
+  if(Math.abs(y-lastY)>0) button.classList.add('pm-scroll-hidden');
+  lastY=y;
+  if(idleTimer) clearTimeout(idleTimer);
+  idleTimer=setTimeout(show,420);
+ };
+ window.addEventListener('scroll',onScroll,{passive:true});
+ window.addEventListener('touchend',()=>{if(idleTimer)clearTimeout(idleTimer);idleTimer=setTimeout(show,420)},{passive:true});
+ window.addEventListener('pageshow',show);
+})();
+</script>
 </body></html>
