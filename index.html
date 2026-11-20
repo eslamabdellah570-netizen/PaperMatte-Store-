@@ -385,7 +385,7 @@ html{scroll-behavior:smooth}
 
 <style id="papermatte-whatsapp-final">
 #papermatte-whatsapp-float{
- position:fixed!important;left:13px!important;right:auto!important;top:auto!important;bottom:13px!important;z-index:99999!important;
+ position:static!important;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;z-index:10!important;margin:14px 13px 16px!important;
  display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:center!important;
  gap:6px!important;width:160px!important;min-width:160px!important;max-width:calc(100vw - 26px)!important;height:48px!important;min-height:48px!important;
  padding:0 7px!important;margin:0!important;box-sizing:border-box!important;
@@ -395,7 +395,7 @@ html{scroll-behavior:smooth}
  text-decoration:none!important;font-family:inherit!important;font-size:16px!important;font-weight:800!important;
  line-height:1!important;direction:ltr!important;white-space:nowrap!important;overflow:hidden!important;
  transform:none!important;transition:background .18s ease,border-color .18s ease,box-shadow .18s ease!important;
- -webkit-tap-highlight-color:transparent!important;touch-action:none!important;cursor:grab!important;
+ -webkit-tap-highlight-color:transparent!important;touch-action:manipulation!important;cursor:pointer!important;
  user-select:none!important;-webkit-user-select:none!important;
 }
 #papermatte-whatsapp-float:hover{background:#0b0c14!important;border-color:#8290FF!important;box-shadow:0 0 0 1px rgba(113,111,234,.09),0 0 10px rgba(75,126,255,.14)!important;transform:none!important}
@@ -729,58 +729,5 @@ loadDashboardProducts();
  <span class="pm-wa-divider" aria-hidden="true"></span>
  <span class="pm-wa-label">ابعتلنا</span><span class="pm-wa-heart" aria-hidden="true">🤍</span>
 </a>
-<script id="papermatte-whatsapp-drag">
-(()=> {
- const el=document.getElementById('papermatte-whatsapp-float');
- if(!el || el.dataset.dragReady) return;
- el.dataset.dragReady='1';
- let dragging=false,moved=false,startX=0,startY=0,originX=0,originY=0;
- const key='papermatte-whatsapp-position-v2';
- const clamp=(v,min,max)=>Math.max(min,Math.min(max,v));
- try{
-  const saved=JSON.parse(localStorage.getItem(key)||'null');
-  if(saved && Number.isFinite(saved.x) && Number.isFinite(saved.y)){
-   el.style.left=clamp(saved.x,0,innerWidth-el.offsetWidth)+'px';
-   el.style.top=clamp(saved.y,0,innerHeight-el.offsetHeight)+'px';
-   el.style.right='auto';el.style.bottom='auto';
-  }
- }catch(e){}
- el.addEventListener('pointerdown',e=>{
-  if(e.button!==undefined && e.button!==0)return;
-  const r=el.getBoundingClientRect();
-  dragging=true;moved=false;startX=e.clientX;startY=e.clientY;originX=r.left;originY=r.top;
-  el.classList.add('is-dragging');
-  try{el.setPointerCapture(e.pointerId)}catch(_){}
-  e.preventDefault();
- });
- el.addEventListener('pointermove',e=>{
-  if(!dragging)return;
-  const dx=e.clientX-startX,dy=e.clientY-startY;
-  if(Math.abs(dx)+Math.abs(dy)>4)moved=true;
-  if(!moved)return;
-  const x=clamp(originX+dx,0,innerWidth-el.offsetWidth);
-  const y=clamp(originY+dy,0,innerHeight-el.offsetHeight);
-  el.style.left=x+'px';el.style.top=y+'px';el.style.right='auto';el.style.bottom='auto';
- });
- const stop=e=>{
-  if(!dragging)return;
-  dragging=false;el.classList.remove('is-dragging');
-  if(moved){
-   try{const r=el.getBoundingClientRect();localStorage.setItem(key,JSON.stringify({x:r.left,y:r.top}))}catch(_){}
-   el.dataset.wasDragged='1';
-   setTimeout(()=>delete el.dataset.wasDragged,350);
-  }
- };
- el.addEventListener('pointerup',stop);
- el.addEventListener('pointercancel',stop);
- el.addEventListener('click',e=>{if(el.dataset.wasDragged==='1'){e.preventDefault();e.stopImmediatePropagation()}},true);
- addEventListener('resize',()=>{
-  if(el.style.left && el.style.top){
-   const r=el.getBoundingClientRect();
-   el.style.left=clamp(r.left,0,innerWidth-el.offsetWidth)+'px';
-   el.style.top=clamp(r.top,0,innerHeight-el.offsetHeight)+'px';
-  }
- });
-})();
-</script>
+<script id="papermatte-whatsapp-drag">/* Button now scrolls naturally with page content; drag positioning disabled. */</script>
 </body></html>
