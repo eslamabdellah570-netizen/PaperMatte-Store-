@@ -1,0 +1,14 @@
+# Copy to wrangler.toml ONLY inside a dedicated preview Worker project.
+# Do not attach these bindings to the production Pages project.
+name = "papermatte-store-preview-api"
+main = "worker.js"
+compatibility_date = "2026-11-24"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "papermatte-preview-db"
+database_id = "SET_AFTER_CREATING_A_SEPARATE_D1_DATABASE"
+
+[[r2_buckets]]
+binding = "PRODUCT_IMAGES"
+bucket_name = "papermatte-preview-images"
