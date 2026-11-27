@@ -771,10 +771,10 @@ async function loadDashboardProducts() {
    {id:"cases",match:/case|cover|folio|tri.?fold|جراب|كفر|غلاف|حافظة|حماي[ةه] للتابلت/iu},
    {id:"pens",match:/pen|pencil|stylus|مپل|ام.?بنسل|قلم|سنون|سن القلم/iu},
    {id:"chargers",match:/charg|adapter|power.?brick|شاحن|محول كهرب|رأس شاحن/iu},
+   {id:"audio",match:/earbud|headphone|freeclip|airpod|speaker|سماعة|سماعات|ايربود/iu}
    {id:"cables",match:/cable|hub|usb|type.?c|hdmi|وصلة|كابل|وصله|موزع/iu},
    {id:"mice",match:/mouse|mice|keyboard|كيبورد|ماوس|فأر|لوحة مفاتيح/iu},
    {id:"protectors",match:/screen.?protect|tempered|glass|paper.?like|protector|اسكرين|سكرين|حماية شاشة|زجاج حماية|حامي الشاشة/iu},
-   {id:"audio",match:/earbud|headphone|freeclip|airpod|speaker|سماعة|سماعات|ايربود/iu}
   ];
   const grouped=Object.fromEntries(accessoryGroups.map(g=>[g.id,[]]));
   accessories.forEach(product=>{
